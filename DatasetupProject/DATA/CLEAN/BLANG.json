@@ -1,0 +1,63 @@
+{"code":"AFK","language":"AFRIKAANS","dir":"LTR"}
+{"code":"ALB","language":"ALBANIAN","dir":"LTR"}
+{"code":"AMH","language":"AMHARIC","dir":"LTR"}
+{"code":"ARB","language":"ARABIC","dir":"RTL"}
+{"code":"ASM","language":"ASSAMESE","dir":"LTR"}
+{"code":"BEN","language":"BENGALI","dir":"LTR"}
+{"code":"BUL","language":"BULGARIAN","dir":"LTR"}
+{"code":"BUR","language":"BURMESE","dir":"LTR"}
+{"code":"CHS","language":"CHINESE SIMPLIFIED","dir":"LTR"}
+{"code":"CHT","language":"CHINESE TRADITIONAL","dir":"LTR"}
+{"code":"CRO","language":"CROATIAN","dir":"LTR"}
+{"code":"CZH","language":"CZECH","dir":"LTR"}
+{"code":"DAN","language":"DANISH","dir":"LTR"}
+{"code":"DUT","language":"DUTCH","dir":"LTR"}
+{"code":"ENG","language":"ENGLISH (KJV)","dir":"LTR"}
+{"code":"EST","language":"ESTONIAN","dir":"LTR"}
+{"code":"FAR","language":"FARSI (PERSIAN)","dir":"RTL"}
+{"code":"FIJ","language":"FIJIAN","dir":"LTR"}
+{"code":"FIL","language":"FILIPINO","dir":"LTR"}
+{"code":"FIN","language":"FINNISH","dir":"LTR"}
+{"code":"FRH","language":"FRENCH","dir":"LTR"}
+{"code":"GER","language":"GERMAN","dir":"LTR"}
+{"code":"GRK","language":"GREEK","dir":"LTR"}
+{"code":"GUJ","language":"GUJARATI","dir":"LTR"}
+{"code":"HEB","language":"HEBREW","dir":"RTL"}
+{"code":"HIN","language":"HINDI","dir":"LTR"}
+{"code":"HUN","language":"HUNGARIAN","dir":"LTR"}
+{"code":"ICE","language":"ICELANDIC","dir":"LTR"}
+{"code":"IND","language":"INDONESIAN","dir":"LTR"}
+{"code":"ITL","language":"ITALIAN","dir":"LTR"}
+{"code":"JAP","language":"JAPANESE","dir":"LTR"}
+{"code":"KAN","language":"KANNADA","dir":"LTR"}
+{"code":"KAZ","language":"KAZAKH","dir":"LTR"}
+{"code":"KOR","language":"KOREAN","dir":"LTR"}
+{"code":"LIT","language":"LITHUANIAN","dir":"LTR"}
+{"code":"MAL","language":"MALAYALAM","dir":"LTR"}
+{"code":"MAO","language":"MAORI","dir":"LTR"}
+{"code":"MAR","language":"MARATHI","dir":"LTR"}
+{"code":"MON","language":"MONGOL","dir":"LTR"}
+{"code":"NEP","language":"NEPALI","dir":"LTR"}
+{"code":"NOR","language":"NORWEGIAN","dir":"LTR"}
+{"code":"ORI","language":"ORIYA","dir":"LTR"}
+{"code":"POL","language":"POLISH","dir":"LTR"}
+{"code":"POR","language":"PORTUGUESE","dir":"LTR"}
+{"code":"PRB","language":"PORTUGUESE (BRAZIL)","dir":"LTR"}
+{"code":"PUN","language":"PUNJABI","dir":"LTR"}
+{"code":"ROM","language":"ROMANIAN","dir":"LTR"}
+{"code":"RUS","language":"RUSSIAN","dir":"LTR"}
+{"code":"SER","language":"SERBIAN","dir":"LTR"}
+{"code":"SIN","language":"SINHALA","dir":"LTR"}
+{"code":"SOM","language":"SOMALI","dir":"LTR"}
+{"code":"SPN","language":"SPANISH","dir":"LTR"}
+{"code":"SWA","language":"SWAHILI","dir":"LTR"}
+{"code":"SWE","language":"SWEDISH","dir":"LTR"}
+{"code":"TAM","language":"TAMIL","dir":"LTR"}
+{"code":"TEL","language":"TELUGU","dir":"LTR"}
+{"code":"THA","language":"THAI","dir":"LTR"}
+{"code":"TUR","language":"TURKISH","dir":"LTR"}
+{"code":"UKR","language":"UKRANIAN","dir":"LTR"}
+{"code":"URU","language":"URUDU","dir":"RTL"}
+{"code":"VET","language":"VIETNAMESE","dir":"LTR"}
+{"code":"XHO","language":"XHOSA","dir":"LTR"}
+{"code":"ZUL","language":"ZULU","dir":"LTR"}
