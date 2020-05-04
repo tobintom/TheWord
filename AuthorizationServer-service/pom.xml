@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.theword</groupId>
-  <artifactId>ZuulEdgeServer</artifactId>
+  <artifactId>AuthorizationServer-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>ZuulEdgeServer</name>
+  <name>AuthorizationServer</name>
   <packaging>jar</packaging>
   
   <parent>
@@ -20,17 +20,17 @@
 	<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 	<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	<spring-security-oauth2.version>2.4.1.RELEASE</spring-security-oauth2.version>
-    <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>	
-  </properties>
-  
-  <dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+    <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
+	
+  </properties>   
+  <dependencies>		
+  		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>			
 		</dependency>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,9 +46,12 @@
 			<artifactId>spring-security-jwt</artifactId>
 			<version>${spring-security-jwt.version}</version>
 		</dependency>
-	</dependencies>
-  
-    <dependencyManagement>
+		<dependency>
+        	<groupId>org.springframework.security</groupId>
+        	<artifactId>spring-security-ldap</artifactId>
+        </dependency>
+  </dependencies>
+  <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -58,15 +61,13 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-  
+	</dependencyManagement>  
+  <build>
+  	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+	</plugins>
+  </build>
 </project>
