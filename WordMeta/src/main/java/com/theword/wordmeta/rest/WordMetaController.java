@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.theword.wordmeta.model.Bible;
 import com.theword.wordmeta.model.Book;
+import com.theword.wordmeta.model.CrossReference;
 import com.theword.wordmeta.repository.BibleRepository;
 
 @RestController
@@ -182,6 +184,37 @@ public class WordMetaController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<Object>(objectNode,HttpStatus.OK);
+	}
+	
+	/**
+	 * Returns verses for a chapter
+	 * @param bibleId
+	 * @param bookId
+	 * @param chapter
+	 * @return
+	 */
+	@RequestMapping(value="/rawcrossreference",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getRawCrossRefence(@RequestParam String verse){
+		CrossReference crossReference = new CrossReference();		  
+		String regEx = "\\d{2}\\s+\\d{1,3}:\\d{1,3}";
+		try {
+			if(verse!=null && verse.matches(regEx)){
+				String book = verse.split("\\s+")[0];
+				String chapter = verse.split("\\s+")[1].split(":")[0];
+				String verseNumber = verse.split("\\s+")[1].split(":")[1];
+				List<CrossReference> crossReferenceList = _bibleRepository.getRawCrossReference(book, chapter, verseNumber);
+				if(crossReferenceList!=null && crossReferenceList.size()>0) {
+					crossReference = crossReferenceList.get(0);
+				}				
+			}else {
+				return new ResponseEntity<Object>(generateErrorNode(new Exception("Invalid pattern for input verse. Please use 'BB CC:VV'")), 
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			} 
+		}catch (Exception e) {
+			return new ResponseEntity<Object>(generateErrorNode(e), 
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Object>(crossReference,HttpStatus.OK);
 	}
 	
 	/**

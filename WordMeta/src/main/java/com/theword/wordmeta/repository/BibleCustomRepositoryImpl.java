@@ -5,11 +5,15 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
+import java.util.List;
+
 import com.theword.wordmeta.model.Bible;
 import com.theword.wordmeta.model.Book;
+import com.theword.wordmeta.model.CrossReference;
 
 public class BibleCustomRepositoryImpl  implements BibleCustomRepository{
 
@@ -74,6 +78,14 @@ public class BibleCustomRepositoryImpl  implements BibleCustomRepository{
 		        match(Criteria.where("code").is(bookCode)),
 		       new CustomProjectAggregationOperation(query) 
 		    ), "B_BOOK", Book.class).getUniqueMappedResult();
+	}
+
+	@Override
+	public List<CrossReference> getRawCrossReference(String book, String chapter, String verse) {
+		
+		return mongoTemplate.find(Query.query(Criteria.where("book").is(book)
+				.and("chapter").is(chapter)
+				.and("verse").is(verse)), CrossReference.class);
 	}
 
 }
