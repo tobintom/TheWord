@@ -135,7 +135,7 @@ public class WordContentController {
 	}
 	
 	/**
-	 * Returns verses for a chapter
+	 * Returns cross references for a verse
 	 * @param bibleId
 	 * @param bookId
 	 * @param chapter
@@ -232,7 +232,7 @@ public class WordContentController {
 	
 	
 	/**
-	 * Returns verses for a chapter
+	 * Returns verses for a passage
 	 * @param bibleId
 	 * @param bookId
 	 * @param chapter
