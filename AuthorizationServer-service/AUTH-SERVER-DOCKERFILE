@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+MAINTAINER TOBIN_TOM
+COPY ./target/AuthorizationServer-service-1.0.jar /opt/lib/
+ENTRYPOINT ["java","-jar","/opt/lib/AuthorizationServer-service-1.0.jar"]
+EXPOSE 4000

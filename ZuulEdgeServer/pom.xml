@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.theword</groupId>
   <artifactId>ZuulEdgeServer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>ZuulEdgeServer</name>
   <packaging>jar</packaging>
   
