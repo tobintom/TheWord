@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 MAINTAINER TOBIN_TOM
 COPY ./target/ZuulEdgeServer-1.0.jar /opt/lib/
-ENTRYPOINT ["java","-jar","/opt/lib/ZuulEdgeServer-1.0.jar"]
+COPY Zuulstartup.sh /opt/lib/Zuulstartup.sh
+RUN chmod 755 /opt/lib/Zuulstartup.sh
 EXPOSE 5000

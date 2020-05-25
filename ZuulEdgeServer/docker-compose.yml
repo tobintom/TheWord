@@ -1,0 +1,97 @@
+version: '2.2'
+services:
+    eureka-server:
+        container_name: Eureka-server
+        build:
+            context: ../EurekaServer-service
+            dockerfile: ./EUREKA-SERVER-DOCKERFILE
+        image: eureka-server:latest
+        expose:
+            - "3000"
+        ports:
+            - "3000:3000"
+        environment: 
+              SERVER_PORT: 3000
+        networks: 
+            - theword-network
+    AuthorizationServer-service:
+        container_name: Authorization-server
+        build:
+            context: ../AuthorizationServer-service
+            dockerfile: ./AUTH-SERVER-DOCKERFILE
+        image: authorization-server:latest
+        entrypoint: /opt/lib/AuthorizationStartup.sh
+        expose:
+            - "4000"
+        ports:
+            - "4000:4000"
+        environment: 
+              SERVER_PORT: 4000
+              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+        networks:
+            - theword-network
+        links:
+            - eureka-server:eureka-server
+        depends_on: 
+            - eureka-server
+    WordContent-service:
+        build:
+            context: ../TheWord
+            dockerfile: ./WORD-SERVICE-DOCKERFILE
+        image: wordcontent-service:latest
+        entrypoint: /opt/lib/Wordstartup.sh
+        expose:
+            - "3010-3014"
+        ports:
+            - "3010-3014:3010"
+        environment: 
+              SERVER_PORT: 3010
+              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+        networks:
+            - theword-network
+        links: 
+            - eureka-server:eureka-server
+        depends_on: 
+            - eureka-server
+    WordMeta-service: 
+        build:
+            context: ../WordMeta
+            dockerfile: ./META-SERVICE-DOCKERFILE
+        image: wordmeta-service:latest
+        entrypoint: /opt/lib/Metastartup.sh
+        expose:
+            - "3001-3005"
+        ports:
+            - "3001-3005:3001"
+        environment: 
+              SERVER_PORT: 3001
+              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+        networks:
+            - theword-network
+        links: 
+            - eureka-server:eureka-server
+        depends_on: 
+            - eureka-server 
+    ZuulServer:
+        container_name: ZuulServer
+        build:
+            context: .
+            dockerfile: ZUUL-EDGE-DOCKERFILE
+        image: zuulserver:latest
+        entrypoint: /opt/lib/Zuulstartup.sh
+        expose:
+            - "5000"
+        ports:
+            - "5000:5000"
+        environment: 
+              SERVER_PORT: 5000
+              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+        networks:
+            - theword-network
+        links:
+            - eureka-server:eureka-server
+        depends_on:
+            - eureka-server
+networks:
+    theword-network: 
+        driver: bridge

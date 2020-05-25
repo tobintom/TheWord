@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 MAINTAINER TOBIN_TOM
 COPY ./target/WordContent-service-1.0.jar /opt/lib/
-ENTRYPOINT ["java","-jar","/opt/lib/WordContent-service-1.0.jar"]
-EXPOSE 3002
+COPY Wordstartup.sh /opt/lib/Wordstartup.sh
+RUN chmod 755 /opt/lib/Wordstartup.sh
+EXPOSE 3010-3014
