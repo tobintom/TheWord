@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3'
 services:
     eureka-server:
         container_name: Eureka-server
@@ -8,7 +8,7 @@ services:
         image: eureka-server:latest
         expose:
             - "3000"
-        ports:
+        ports: 
             - "3000:3000"
         environment: 
               SERVER_PORT: 3000
@@ -27,7 +27,8 @@ services:
             - "4000:4000"
         environment: 
               SERVER_PORT: 4000
-              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+              EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka  
+              LDAP_URL: ldap://192.168.99.100:389/dc=theword,dc=org            
         networks:
             - theword-network
         links:
@@ -47,6 +48,8 @@ services:
         environment: 
               SERVER_PORT: 3010
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+              MONGODB_HOST: 192.168.99.100
+              MONGODB_PORT: 37020
         networks:
             - theword-network
         links: 
@@ -66,6 +69,8 @@ services:
         environment: 
               SERVER_PORT: 3001
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
+              MONGODB_HOST: 192.168.99.100
+              MONGODB_PORT: 37020              
         networks:
             - theword-network
         links: 
