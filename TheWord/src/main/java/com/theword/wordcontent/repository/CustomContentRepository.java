@@ -15,4 +15,5 @@ public interface CustomContentRepository {
 	List<Book> getBibleBooks(String language);
 	List<VerseText> getPassages(List<String> passages,String bibleID);
 	List<VerseText> getSearchPassages(String key,String strict,String bibleID, String limit);
+	List<String> getDailyVerse(String month, String day);
 }

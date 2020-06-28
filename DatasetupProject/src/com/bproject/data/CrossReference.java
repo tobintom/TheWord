@@ -54,7 +54,7 @@ public class CrossReference {
 			    	String[] names = line.split("\\s+");
 			    	String vote = names[2];
 			    	//System.out.println(names[0] +" - " +vote);
-			    	if(Integer.parseInt(vote)>3) {
+			    	if(Integer.parseInt(vote)>1) {
 			    			writer.write(line +"\n");
 			    			if(crossMap.containsKey(names[0])){
 			    				crossMap.get(names[0]).add(names[1]+"|"+vote);
@@ -71,9 +71,9 @@ public class CrossReference {
 			
 			crossMap.forEach((k,v)->
 			{
-				if(((List<String>)v).size()>5) {
+				if(((List<String>)v).size()>10) {
 					Collections.sort(v, cr.new xcomparator());
-					v=v.subList(0, 5);	
+					v=v.subList(0, 10);	
 					crossRefMap.put(k, v);
 				}else {
 					crossRefMap.put(k, v); 
@@ -131,6 +131,7 @@ public class CrossReference {
 						value.add(finalMap.get(val[0])+" " + val[1]+":"+val[2]);
 						if(finalMap.get(val[0])==null) {
 							System.out.println((val[0]));
+							
 						}
 					}else {
 						String[] val=(pvalSplit[0]).split("\\.");

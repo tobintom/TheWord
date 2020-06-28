@@ -178,5 +178,18 @@ private final MongoTemplate mongoTemplate;
 		return returnObject;
 	}
 
+	@Override
+	public List<String> getDailyVerse(String month, String day) {
+		List<String> verses = null;
+		List<Bson> filters = new ArrayList<>();
+		filters.add(and(eq("month", month),eq("date", day)));
+		MongoCursor<Document> documents = mongoTemplate.getCollection("DAILY_VERSE").find(Filters.and(filters)).iterator();		 
+		while(documents!=null && documents.hasNext()) {
+			 Document document = documents.next();
+			 verses = document.getList("references", String.class);
+		}
+		return verses;
+	}
+
 
 }
