@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +23,7 @@ import com.theword.wordmeta.model.Bible;
 import com.theword.wordmeta.model.Book;
 import com.theword.wordmeta.model.CrossReference;
 import com.theword.wordmeta.repository.BibleRepository;
+import com.theword.wordmeta.repository.DataComponent;
 
 @RestController
 @RequestMapping("/theword/v1/bibles")
@@ -32,6 +31,9 @@ public class WordMetaController {
 
 	@Autowired
 	BibleRepository _bibleRepository;
+	
+	@Autowired
+	DataComponent _dataComponent;
 	
 	/**
 	 * Returns List of Supported Bible Languages
@@ -47,7 +49,8 @@ public class WordMetaController {
 		ObjectNode node = mapper.createObjectNode();
 		ArrayNode bibleJSONArray = mapper.createArrayNode();
 		try {
-			List<Bible> bibles = _bibleRepository.findAll(Sort.by(Direction.ASC, "language"));				
+			//List<Bible> bibles = _bibleRepository.findAll(Sort.by(Direction.ASC, "language"));	
+			List<Bible> bibles = _dataComponent.getBibles();
 	        if(bibles!=null && bibles.size()>0) {
 	        	node.put("status", "success");
 				for (Bible b : bibles) {
@@ -75,19 +78,13 @@ public class WordMetaController {
 	 */
 	@RequestMapping(value="/{bibleId}/books",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
 	public ResponseEntity<Object> getBibleBooks(@PathVariable String bibleId){
-		Bible bible = null;
-		Bible engBible = null;
+		Bible bible = null;		 
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode objectNode = mapper.createObjectNode();
 		Map<String, String> engMap = new HashMap<String, String>();
 		try {
 			bible = _bibleRepository.getBibleBooks(bibleId.toUpperCase());
-			if(bibleId!=null && !bibleId.toUpperCase().equals("ENG")) {
-			  engBible = _bibleRepository.getBibleBooks("ENG");
-			  for(Book b: engBible.getBooks()) {
-				  engMap.put(b.getBookCode(), b.getBookName());
-			  }
-			}
+			engMap = _dataComponent.getEnglishBooks();
 			
 			if(bible!=null && bible.getBooks()!=null) {
 				objectNode.put("status", "success");
@@ -128,10 +125,12 @@ public class WordMetaController {
 		try {
 			book = _bibleRepository.getBookChapters(bibleId.toUpperCase(),bookId.toUpperCase());	
 			if(book!=null) {
+				Map<String, String> engMap = _dataComponent.getEnglishBooks();
 				objectNode.put("status", "success");
 				objectNode.put("id", bibleId.toUpperCase());
 				objectNode.put("number", bookId.toUpperCase());
 				objectNode.put("name", book.getBookName());
+				objectNode.put("english", engMap.get(book.getBookCode()));
 				ArrayNode bibleJSONArray = mapper.createArrayNode();
 				for(String chapter:book.getChapters()) {
 					JsonNode jsonNode = mapper.readTree(chapter);

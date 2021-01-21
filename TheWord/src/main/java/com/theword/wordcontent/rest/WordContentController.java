@@ -32,7 +32,8 @@ import com.theword.wordcontent.model.Book;
 import com.theword.wordcontent.model.Content;
 import com.theword.wordcontent.model.Verse;
 import com.theword.wordcontent.model.VerseText;
-import com.theword.wordcontent.repository.ContentRepository; 
+import com.theword.wordcontent.repository.ContentRepository;
+import com.theword.wordcontent.repository.DataComponent; 
 
 @RestController
 @RequestMapping("/theword/v1/bible")
@@ -40,6 +41,9 @@ public class WordContentController {
 	
 	@Autowired
 	ContentRepository contentRepository;
+	
+	@Autowired
+	DataComponent dataComponent;
 	
 	@Autowired
     private RestTemplate restTemplate;
@@ -50,7 +54,8 @@ public class WordContentController {
     @Value("${theword.metaservice.serviceId}")
     private String theWordMetaServiceId;
 
-	
+    
+    
 	/**
 	 * Returns verses for a chapter
 	 * @param bibleId
@@ -74,6 +79,7 @@ public class WordContentController {
 				objectNode.put("dir", bible.getDir());
 				objectNode.put("number", bookId.toUpperCase());
 				objectNode.put("name", content.getBookName());
+				objectNode.put("english", dataComponent.getEnglishBooks().get(content.getBookCode()));
 				objectNode.put("chapter", chapter.toUpperCase());
 				ArrayNode bibleJSONArray = mapper.createArrayNode();
 				for(Verse verse:content.getVerses()) {
@@ -117,6 +123,7 @@ public class WordContentController {
 				objectNode.put("dir", bible.getDir());
 				objectNode.put("number", bookId.toUpperCase());
 				objectNode.put("name", content.getBookName());
+				objectNode.put("english", dataComponent.getEnglishBooks().get(content.getBookCode()));
 				objectNode.put("chapter", chapter.toUpperCase());
 				ArrayNode bibleJSONArray = mapper.createArrayNode();
 				for(Verse verse:content.getVerses()) {
@@ -134,6 +141,124 @@ public class WordContentController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<Object>(objectNode,HttpStatus.OK);
+	}
+	
+	/**
+	 * Returns verses for the next chapter
+	 * @param bibleId
+	 * @param bookId
+	 * @param chapter
+	 * @return
+	 */
+	@RequestMapping(value="/{bibleId}/nextChapter",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getNextChapterVerses(@PathVariable String bibleId,
+			@RequestParam(required=true,name="bookId") String bookId, @RequestParam(required=true,name="chapter") String chapter){
+		Content content = null;
+		Bible bible = null;
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode = mapper.createObjectNode();
+		try {
+			String newNav = getNext(bookId, chapter);
+			String newBook = newNav!=null?newNav.substring(0, newNav.indexOf(":")):"";
+			String newChapter = newNav!=null?newNav.substring(newNav.indexOf(":")+1):"";
+			content = contentRepository.getChapterVerses(bibleId.toUpperCase(),newBook.toUpperCase(),newChapter.toUpperCase());	
+			bible = contentRepository.getBible(bibleId.toUpperCase());
+			if(content!=null) {		
+				objectNode.put("status", "success");
+				objectNode.put("id", bibleId.toUpperCase());
+				objectNode.put("language", bible.getLanguage());
+				objectNode.put("dir", bible.getDir());
+				objectNode.put("number", newBook.toUpperCase());
+				objectNode.put("name", content.getBookName());
+				objectNode.put("english", dataComponent.getEnglishBooks().get(content.getBookCode()));
+				objectNode.put("chapter", newChapter.toUpperCase());
+				ArrayNode bibleJSONArray = mapper.createArrayNode();
+				for(Verse verse:content.getVerses()) {
+					ObjectNode jsonNode = mapper.createObjectNode();
+					jsonNode.put("verse",verse.getVerse());
+					jsonNode.put("text",verse.getText());
+					bibleJSONArray.add(jsonNode);
+				}
+				 
+				objectNode.putArray("verses").addAll(bibleJSONArray);
+			}else
+				objectNode = generateNoDataNode("No verses found for the book and chapter.");
+		}catch (Exception e) {
+			return new ResponseEntity<Object>(generateErrorNode(e), 
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Object>(objectNode,HttpStatus.OK);
+	}
+		
+	private String getNext(String book, String chapter) {
+		String newNavigation = "";
+		int total =  dataComponent.getBibleChapters().get(book);
+		if(total>Integer.valueOf(chapter)) {
+			newNavigation = book+":"+ (Integer.valueOf(chapter)+1);
+		}else {
+			newNavigation = dataComponent.getBibleChapters().higherKey(book)+":1";
+		}		
+		return newNavigation;
+	}
+	
+	/**
+	 * Returns verses for the previous chapter
+	 * @param bibleId
+	 * @param bookId
+	 * @param chapter
+	 * @return
+	 */
+	@RequestMapping(value="/{bibleId}/previousChapter",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getPreviousChapterVerses(@PathVariable String bibleId,
+			@RequestParam(required=true,name="bookId") String bookId, @RequestParam(required=true,name="chapter") String chapter){
+		Content content = null;
+		Bible bible = null;
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode = mapper.createObjectNode();
+		try {
+			String newNav = getPrevious(bookId, chapter);
+			String newBook = newNav!=null?newNav.substring(0, newNav.indexOf(":")):"";
+			String newChapter = newNav!=null?newNav.substring(newNav.indexOf(":")+1):"";
+			content = contentRepository.getChapterVerses(bibleId.toUpperCase(),newBook.toUpperCase(),newChapter.toUpperCase());	
+			bible = contentRepository.getBible(bibleId.toUpperCase());
+			if(content!=null) {		
+				objectNode.put("status", "success");
+				objectNode.put("id", bibleId.toUpperCase());
+				objectNode.put("language", bible.getLanguage());
+				objectNode.put("dir", bible.getDir());
+				objectNode.put("number", newBook.toUpperCase());
+				objectNode.put("name", content.getBookName());
+				objectNode.put("english", dataComponent.getEnglishBooks().get(content.getBookCode()));
+				objectNode.put("chapter", newChapter.toUpperCase());
+				ArrayNode bibleJSONArray = mapper.createArrayNode();
+				for(Verse verse:content.getVerses()) {
+					ObjectNode jsonNode = mapper.createObjectNode();
+					jsonNode.put("verse",verse.getVerse());
+					jsonNode.put("text",verse.getText());
+					bibleJSONArray.add(jsonNode);
+				}
+				 
+				objectNode.putArray("verses").addAll(bibleJSONArray);
+			}else
+				objectNode = generateNoDataNode("No verses found for the book and chapter.");
+		}catch (Exception e) {
+			return new ResponseEntity<Object>(generateErrorNode(e), 
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Object>(objectNode,HttpStatus.OK);
+	}
+
+	private String getPrevious(String book, String chapter) {
+		String newNavigation = "";
+		int total = dataComponent.getBibleChapters().get(book);
+		if(total>=Integer.valueOf(chapter) && Integer.valueOf(chapter)>1) {
+			newNavigation = book+":"+ (Integer.valueOf(chapter)-1);
+		}else {
+			String key = dataComponent.getBibleChapters().lowerKey(book);
+			newNavigation = key+":"+dataComponent.getBibleChapters().get(key);
+		}
+		
+		return newNavigation;
 	}
 	
 	/**
