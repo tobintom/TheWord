@@ -16,4 +16,5 @@ public interface CustomContentRepository {
 	List<VerseText> getPassages(List<String> passages,String bibleID);
 	List<VerseText> getSearchPassages(String key,String strict,String bibleID, String limit);
 	List<String> getDailyVerse(String month, String day);
+	List<String> getRandomDailyVerse(String month, String day);
 }

@@ -575,6 +575,80 @@ public class WordContentController {
 	}
 	
 	/**
+	 * Returns verses for a passage
+	 * @param bibleId
+	 * @param bookId
+	 * @param chapter
+	 * @return
+	 */
+	@RequestMapping(value="/{bibleId}/randomDailyVerse",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getRandomDailyVerse(@PathVariable(required=true,name="bibleId") String bibleId,
+			@RequestParam(required=false,name="date") String date){ 
+		List<String> passageCollection;
+		String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";		
+		List<VerseText> verses = new ArrayList<VerseText>();
+		List<Book> books = null;
+		Bible bible = null;
+		Map<String, String> bookMap = new HashMap<String, String>();
+		Map<String, String> engBookMap = new HashMap<String, String>();
+		ObjectNode objectNode = null;
+		String month = "";
+		String day = "";
+		try {			
+			    if(date!=null && date.matches(regex)) {
+			    	month = date.split("/")[0];
+			    	day = date.split("/")[1];
+			    }else {
+			    	LocalDate cal = LocalDate.now();
+			    	month = (cal.getMonthValue()<10)?"0"+cal.getMonthValue():String.valueOf(cal.getMonthValue());
+			    	day = String.valueOf(cal.getDayOfMonth());			    			
+			    }
+			
+				//get the Bible Books from Cache
+				//Bible Language
+				books = contentRepository.getBibleBooks(bibleId.toUpperCase());
+				books.forEach(i ->{
+					bookMap.put(i.getBookCode(), i.getBookName());
+				});
+				//English Equivalent
+				books = contentRepository.getBibleBooks("ENG");
+				books.forEach(i ->{
+					engBookMap.put(i.getBookCode(), i.getBookName());
+				});
+				//Get Bible language details
+				bible = contentRepository.getBible(bibleId.toUpperCase());
+						
+				//Get Collection
+				passageCollection = contentRepository.getRandomDailyVerse(month, day);				
+					
+				if(passageCollection!=null && passageCollection.size()>0) {
+					Random rand = new Random();
+				    int randomNum = rand.nextInt((1 - 0) + 1) + 0;
+				    passageCollection.remove(randomNum);
+				    List<String> passageList = new ArrayList<String>();
+				    passageCollection.forEach(p ->{
+				    	String[] lists = p.split(";");
+				    	for(String list:lists) {
+				    		passageList.add(list);
+				    	}
+				    });
+					//call DB
+					verses = contentRepository.getPassages(passageList, bibleId);
+					if(verses!=null && verses.size()>0)
+						objectNode = retrieveJSONResponse(verses, bookMap, engBookMap, bible);
+					else
+						objectNode = generateNoDataNode("No passage verses found.");
+				}else
+					objectNode = generateNoDataNode("No valid passages in the request.");
+			  
+		}catch (Exception e) {
+			return new ResponseEntity<Object>(generateErrorNode(e), 
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Object>(objectNode,HttpStatus.OK);
+	}
+	
+	/**
 	 * @param verses
 	 * @param bookMap
 	 * @return
