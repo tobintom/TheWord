@@ -65,7 +65,9 @@ public class RandomPopularVerse {
 		         //System.out.println(d+" "+ (date.getMonth()+1)+"/"+date.getDate() + " = " +vlist.get(d-1) +","+vlist.get((s-1)+d)); 
 		      
 			String month = String.valueOf(date1.getMonth()+1);
+			month=month.length()<2?"0"+month:month;
 			String date = String.valueOf(date1.getDate());
+			date=date.length()<2?"0"+date:date;
 			List<String> vfinalList = new ArrayList<String>();
 			vfinalList.add(vlist.get(d-1));
 			vfinalList.add(vlist.get((s-1)+d));
