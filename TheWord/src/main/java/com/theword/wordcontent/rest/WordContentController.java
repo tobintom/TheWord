@@ -192,6 +192,10 @@ public class WordContentController {
 		
 	private String getNext(String book, String chapter) {
 		String newNavigation = "";
+		if(book!=null && book.trim().equalsIgnoreCase("66") &&
+				chapter!=null && chapter.trim().equalsIgnoreCase("22")) {
+			return "01:1";
+		}
 		int total =  dataComponent.getBibleChapters().get(book);
 		if(total>Integer.valueOf(chapter)) {
 			newNavigation = book+":"+ (Integer.valueOf(chapter)+1);
@@ -250,6 +254,10 @@ public class WordContentController {
 
 	private String getPrevious(String book, String chapter) {
 		String newNavigation = "";
+		if(book!=null && book.trim().equalsIgnoreCase("01") &&
+			chapter!=null && chapter.trim().equalsIgnoreCase("1")){
+				return "66:22";
+			}
 		int total = dataComponent.getBibleChapters().get(book);
 		if(total>=Integer.valueOf(chapter) && Integer.valueOf(chapter)>1) {
 			newNavigation = book+":"+ (Integer.valueOf(chapter)-1);
@@ -527,7 +535,7 @@ public class WordContentController {
 			    }else {
 			    	LocalDate cal = LocalDate.now();
 			    	month = (cal.getMonthValue()<10)?"0"+cal.getMonthValue():String.valueOf(cal.getMonthValue());
-			    	day = String.valueOf(cal.getDayOfMonth());			    			
+			    	day = cal.getDayOfMonth()<10?"0"+cal.getDayOfMonth():String.valueOf(cal.getDayOfMonth());			    			
 			    }
 			
 				//get the Bible Books from Cache
@@ -601,7 +609,7 @@ public class WordContentController {
 			    }else {
 			    	LocalDate cal = LocalDate.now();
 			    	month = (cal.getMonthValue()<10)?"0"+cal.getMonthValue():String.valueOf(cal.getMonthValue());
-			    	day = String.valueOf(cal.getDayOfMonth());			    			
+			    	day = cal.getDayOfMonth()<10?"0"+cal.getDayOfMonth():String.valueOf(cal.getDayOfMonth());			    			
 			    }
 			
 				//get the Bible Books from Cache
