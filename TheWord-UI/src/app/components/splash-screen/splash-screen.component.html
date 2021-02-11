@@ -1,0 +1,25 @@
+<div class="app-splash-screen"
+    [ngStyle]="{          
+        opacity: opacityChange,
+        left: windowWidth,
+        transition: splashTransition,        
+        background: 'url(' + backgroundUrl + ') no-repeat center center fixed',
+        'background-size': 'cover'        
+    }"
+    *ngIf="showSplash" >
+    
+    <div class="app-splash-screen-inner">
+        <div class="app-text">
+            <span [dir]=dir>
+            {{dailyVerse}} <BR><BR>
+            <p   class="app-label">
+            {{chapterVerse}}
+            </p>
+            
+            </span>
+        </div>
+        <div  class="moving-clouds" style="background-image: url('../../../assets/images/bg/clouds.png'); "></div>
+        
+        <div class="app-loader"></div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div   [ngStyle]="{          
+    background: 'url(' + bgurl + ') no-repeat center center fixed',
+    'background-size': 'cover' 
+}">
+    
+<!-- Header -->
+<header id="header">
+    <div class="logo"><span>Home</span></div>
+</header>
+
+<!-- Main -->
+<section id="main">
+    <div class="inner">
+    <!-- One -->    
+        <section id="one" class="wrap style1">             
+            <header class="special">
+                <h2 [dir]=dir>{{book}} {{chapter}} </h2>
+                <p *ngIf="!isEng()" dir="ltr">{{englishName}} {{chapter}}</p>
+            </header>
+            <div class="content">
+                <p><span class="image left"><img [src]=icon [title]=englishName  /></span></p>
+                    <p [dir]=dir *ngFor="let verse of verses" [align] = align>                        
+                        <sup class="versenum">{{verse.verse}}.</sup> <strong style="font-size: 18px;">{{verse.text}}</strong>                        
+                    </p>               
+            </div>
+            </section>    
+    </div>
+</section>
+    <a class="bible-nav-button nav-left fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white left-1" href="/bible/2428/GEN.3.HAT" title="قصة النبي آدم الى النبي يوسف 3" data-vars-event-category="Bible Chapter" data-vars-event-action="Previous" data-vars-event-label="GEN.3"><div class="flex"><svg class="reader-arrow h-100 ma0 pa0" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(180, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
+    <a class="bible-nav-button nav-right fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white right-1" href="/bible/2428/GEN.5.HAT" title="قصة النبي آدم الى النبي يوسف 5" data-vars-event-category="Bible Chapter" data-vars-event-action="Next" data-vars-event-label="GEN.5"><div class="flex"><svg class="reader-arrow" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(0, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        Copyleft <span class="copy-left">&copy;</span> {{anio}} The Word
+        <BR>Freely Received, Freely Given.
+    </div>
+</footer>
+</div>
+
+
+ 

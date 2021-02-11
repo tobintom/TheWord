@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div [ngStyle]="{          
+    background: 'url(' + bgurl + ') no-repeat center center fixed',
+    'background-size': 'cover'
+}">
+    
+<!-- Header -->
+<header id="header">
+    <div class="logo"><span>Verse Of The Day</span></div>
+</header>
+
+<!-- Main -->
+<section id="main">
+    <div class="vodinner">
+
+    <!-- One -->
+        <section id="one" class="wrap style1">          
+            <header class="special">
+                <a (click)="chapterClick();" role="button" title="Click to read full chapter" style="text-decoration: none;" >
+                    <h2 [dir]=dir>{{book}} {{chapter}} <i class="fa fa-list"></i></h2></a>
+                <p *ngIf="!isEng()" dir="ltr">{{englishName}} {{chapter}}</p>
+            </header>
+            <div class="content">
+                <p [dir]=dir [align] = align>
+                    <label *ngFor="let verse of verses" >
+                    {{verse.verse}} {{verse.text}}
+                    </label>
+                </p>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        Copyleft <span class="copy-left">&copy;</span> {{anio}} The Word
+        <BR>Freely Received, Freely Given.
+    </div>
+</footer>
+</div>
+
+
+ 
