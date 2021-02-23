@@ -26,20 +26,33 @@
 		line-height: 1;
 	}
 */
-
-.bible-nav-button{bottom:90px}
-@media screen and (min-width: 60em){
-	.bible-nav-button{bottom:45%}
-	.bible-nav-button.nav-left{right:inherit;left:15%}
-	.bible-nav-button.nav-right{left:inherit;right:15%}
-	div.flex-no-wrap>nav>ul{flex-wrap:nowrap}
+.verseText:hover{
+	background-color: #cac6c6;
 }
+.verseText:active{
+	background-color: #cac6c6;
+}
+.mat-form-field-infix{
+	width: 300px !important;
+}
+.mat-select-value-text {
+    white-space: break-spaces !important;
+}
+.mat-select-panel {
+    width: auto !important;
+	white-space: break-spaces !important;
+}
+.dialogClass{
+	width: 60%;
+	max-height: 85%;
+}
+.bible-nav-button{bottom:90px}
 .fixed{position:fixed}
 .dim{opacity:1}.dim,.dim:focus,.dim:hover{transition:opacity .15s ease-in}.dim:focus,.dim:hover{opacity:.5}.dim:active{opacity:.8;transition:opacity .15s ease-out}
 .br-100{border-radius:100%}
 .ba{border-style:solid;border-width:1px}
 .b--black-20{border-color:rgba(0,0,0,0.2)}
-.pa2{padding:.5rem}
+.pa2{padding:0.5rem}
 .pa3-m{padding:0.5rem}
 .flex-l{display:flex}
 .items-center{align-items:center}
@@ -47,6 +60,14 @@
 .bg-white{background-color:#fff}
 .left-1{left:1rem}
 .right-1{right:1rem}
+
+@media screen and (min-width: 60em){
+	.bible-nav-button{bottom:45%}
+	div.flex-no-wrap>nav>ul{flex-wrap:nowrap}
+	.pa3-m{padding:0.5rem}
+}
+
+
 
 .copy-left {
     display: inline-block;
@@ -2134,7 +2155,8 @@
 	.versenum {
 		font-family: "Arial";		 
 		font-weight: bold;
-		font-size: 13px;		
+		font-size: 13px;	
+		color: #000;	
 	}
 
 	input[type="text"],
@@ -2434,6 +2456,7 @@
 	.image {
 		display: inline-block;
 		position: relative;
+		width: 25%;
 	}
 
 		.image.flush {
@@ -2454,7 +2477,7 @@
 
 		.image.left {
 			float: left;
-			margin: 0 1rem 1rem 0;
+			margin: 0 0.5rem 0.5rem 0;
 			top: 0.25rem;
 		}
 
@@ -2725,7 +2748,9 @@
 		}
 
 		.spotlight > * {
-			width: 50%;
+			width: 100%;
+			align-items: center;
+    		text-align: center;
 		}
 
 		.spotlight p:last-child {
@@ -2733,7 +2758,7 @@
 		}
 
 		.spotlight .inner {
-			padding: 6rem;
+			padding: 0.5rem;
 		}
 
 		.spotlight .image {
@@ -2787,24 +2812,16 @@
 		@media screen and (max-width: 1280px) {		
 
 			.spotlight .inner {
-				padding: 4rem;
+				padding: 0.5rem;
 			}
-			 
-
 		}
 
 		@media screen and (max-width: 980px) {
-			#main div.inner {				 
-				max-width: 95%;
-			}
+			 
 			label {				 
 				font-size: 1.2rem;	
 				line-height: 1.5rem;			 
-			}
-
-			#main div.vodinner {				 
-				max-width: 95%;
-			}
+			}			 
 			.spotlight {
 				display: -moz-flex;
 				display: -webkit-flex;
@@ -2873,6 +2890,9 @@
 		}
 
 		@media screen and (max-width: 736px) {
+			.dialogClass{
+				width: 90%;
+			}
 			#main div.inner {				 
 				max-width: 95%;
 			}
@@ -2885,7 +2905,7 @@
 			}
 
 			.spotlight .inner {
-				padding: 2rem;
+				padding: 0.5rem;
 			}
 
 		}
@@ -3074,6 +3094,7 @@
 		-moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.95);
 		box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.95);
 		border-radius: 30px;
+		word-break: break-word;
 	}
 
 	#main > .vodinner {
@@ -3086,6 +3107,7 @@
 		-moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.95);
 		box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.95);
 		border-radius: 30px;
+		word-break: break-word;
 	}
 
 	@media screen and (max-width: 980px) {
@@ -3094,7 +3116,7 @@
 			width: 100%;
 			min-width: 100%;
 			float: none;
-			margin: 0 0 2rem 0;
+			margin: 0 0 0.5rem 0;
 		}
 
 			#main .image img {
@@ -3112,6 +3134,7 @@
 
 	.wrap.style1 .content p {
 		margin-bottom: 0.3rem;
+		word-break: break-word;
 	}
 
 	.wrap > header {
@@ -3168,6 +3191,7 @@
 			}
 
 		@media screen and (max-width: 736px) {
+			.pa3-m{padding:0.5rem}
 
 			.wrapper > header {
 				padding: 1.5rem;

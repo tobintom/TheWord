@@ -6,10 +6,11 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, take, tap } from 'rxjs/operators';
+import { SpinnerServiceService } from './spinner-service.service';
 
 const helper = new JwtHelperService();
 
@@ -17,7 +18,8 @@ const helper = new JwtHelperService();
 export class ServiceInterceptorInterceptor implements HttpInterceptor {
   urlsToNotUse: Array<string>;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService,
+    private readonly spinnerOverlayService: SpinnerServiceService) {
     this.urlsToNotUse= [
       'oauth/token' 
     ];
@@ -25,18 +27,20 @@ export class ServiceInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.isValidRequestForInterceptor(request.url)) {
-       
+      const spinnerSubscription: Subscription = this.spinnerOverlayService.spinner$.subscribe();
           return next.handle(this.addToken(request,this.auth.getToken())).pipe(
             catchError(error => {
+               
               if (error instanceof HttpErrorResponse ) {                
                 this.auth.authenticate().subscribe(()=>{
-                    location.reload();
+                   // location.reload();
                 });
               } else {
                 return throwError(error);
               }
               return throwError(error);
-            })
+            }), 
+            finalize(()=> spinnerSubscription.unsubscribe())
           );             
     }
     return next.handle(request);

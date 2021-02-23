@@ -6,30 +6,77 @@
     
 <!-- Header -->
 <header id="header">
-    <div class="logo"><span>Home</span></div>
+    <div class="logo"><span>The Word</span>
+        
+    </div>   
 </header>
 
 <!-- Main -->
 <section id="main">
     <div class="inner">
     <!-- One -->    
+    <section id="three" class="wrap">
+        <div class="spotlight">             
+            <div class="inner">
+                <p style="padding: 0%;margin: 0%;"><i class="fa fa-language" style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-form-field>
+                    <mat-label style="font-size: larger ;color: #000;">Language</mat-label>
+                    <mat-select matNativeControl  placeholder="Select Language" style="font-size: 20px;width:200px;"
+                    [(ngModel)]="lang" name="language" (selectionChange)="changeLang($event)">
+                        <mat-option *ngFor="let item of languages" [value]="item.id" style="font-size: 18px;">
+                            {{item.language}}
+                        </mat-option>
+                    </mat-select>    
+                    </mat-form-field>                  
+                </p>    
+                <p style="padding: 0%;margin: 0%;text-align: center;"> 
+                   <i class="fa fa-book" style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <mat-form-field>
+                    <mat-label style="font-size: larger ;color: #000;">Book</mat-label>
+                    <mat-select matNativeControl placeholder="Select Book" (selectionChange)="changeBook($event)"
+                        [(ngModel)]="selectedbook" name="book" style="font-size: 18px;">
+                        <mat-option *ngFor="let book of books" [value]="book.number" >
+                                  <p style="word-wrap: break-word;white-space: pre-wrap;font-size: 17px;">{{book.name}} <span *ngIf="!isEng()">({{book.english}})</span></p>
+                        </mat-option>
+                    </mat-select>    
+                    </mat-form-field> 
+                    &nbsp;&nbsp;&nbsp;
+                    <mat-form-field style="width: 50px;">
+                        <mat-label style="font-size: larger ;color: #000;">Chapter</mat-label>
+                        <mat-select matNativeControl placeholder="Select Chapter" (selectionChange)="changeChapter($event)"
+                            [(ngModel)]="selectedchapter" name="chapter" style="font-size: 18px;">
+                            <mat-option *ngFor="let chapter of chapters" [value]="chapter" style="font-size: 18px;">
+                                      {{chapter}}
+                            </mat-option>
+                        </mat-select>    
+                        </mat-form-field>
+                </p>          
+                </div>                                 
+        </div>
+    </section>
         <section id="one" class="wrap style1">             
-            <header class="special">
+            <header class="special">             
                 <h2 [dir]=dir>{{book}} {{chapter}} </h2>
                 <p *ngIf="!isEng()" dir="ltr">{{englishName}} {{chapter}}</p>
             </header>
             <div class="content">
                 <p><span class="image left"><img [src]=icon [title]=englishName  /></span></p>
-                    <p [dir]=dir *ngFor="let verse of verses" [align] = align>                        
-                        <sup class="versenum">{{verse.verse}}.</sup> <strong style="font-size: 18px;">{{verse.text}}</strong>                        
+                    <p [dir]=dir *ngFor="let verse of verses" [align] = align >                        
+                        <span *ngIf="verse.text!=' '" >
+                                <a role="button" (click)="showCrossRef(verse.verse);" 
+                                class="verseText" style="text-decoration: none;" title="Click for Cross References">
+                                    <sup class="versenum">{{verse.verse}}.</sup> <strong style="font-size: 17px;cursor: pointer;" >{{verse.text}}</strong> 
+                                 </a>                                                   
+                        </span>    
                     </p>               
             </div>
             </section>    
     </div>
 </section>
-    <a class="bible-nav-button nav-left fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white left-1" href="/bible/2428/GEN.3.HAT" title="قصة النبي آدم الى النبي يوسف 3" data-vars-event-category="Bible Chapter" data-vars-event-action="Previous" data-vars-event-label="GEN.3"><div class="flex"><svg class="reader-arrow h-100 ma0 pa0" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(180, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
-    <a class="bible-nav-button nav-right fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white right-1" href="/bible/2428/GEN.5.HAT" title="قصة النبي آدم الى النبي يوسف 5" data-vars-event-category="Bible Chapter" data-vars-event-action="Next" data-vars-event-label="GEN.5"><div class="flex"><svg class="reader-arrow" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(0, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
+    <a class="bible-nav-button nav-left fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white left-1" (click)="previousChapter();" role="button" title="Previous Chapter"><div class="flex"><svg class="reader-arrow h-100 ma0 pa0" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(180, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
+    <a class="bible-nav-button nav-right fixed dim br-100 ba b--black-20 pa2 pa3-m flex items-center justify-center bg-white right-1" (click)="nextChapter();" role="button" title="Next Chapter"><div class="flex"><svg class="reader-arrow" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path transform="rotate(0, 12, 12)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="#888888" d="M 9.07,17.44 L 14.4,12.1 14.4,12.1 C 14.6,11.91 14.6,11.59 14.4,11.4 L 9.09,6.08 9.09,6.08 C 8.7,5.7 8.7,5.08 9.09,4.69 L 9.09,4.69 9.09,4.69 C 9.47,4.31 10.09,4.31 10.47,4.69 L 16.85,11.07 16.85,11.07 C 17.24,11.46 17.24,12.09 16.85,12.49 L 10.49,18.85 10.49,18.85 C 10.09,19.24 9.46,19.24 9.07,18.85 L 9.07,18.85 9.07,18.85 C 8.68,18.46 8.68,17.83 9.07,17.44 Z M 9.07,17.44"></path></svg></div></a>
 
+  
 <!-- Footer -->
 <footer id="footer">
     <div class="container">

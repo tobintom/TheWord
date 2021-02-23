@@ -11,9 +11,14 @@ import { AuthService } from './service/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HeaderComponent } from './components/home/header/header.component';
 import { DailyVerseComponent } from './components/daily-verse/daily-verse.component';
 import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { SpinnerOverlayComponent } from './components/spinner-overlay/spinner-overlay.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +27,21 @@ import { SearchComponent } from './components/search/search.component';
     HomeComponent,
     HeaderComponent,
     DailyVerseComponent,
-    SearchComponent
+    SearchComponent,
+    DialogComponent,
+    SpinnerOverlayComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   providers: [
     { provide: APP_INITIALIZER, 
@@ -44,6 +55,7 @@ import { SearchComponent } from './components/search/search.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[DialogComponent]
 })
 export class AppModule { }

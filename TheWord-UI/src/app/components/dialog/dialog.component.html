@@ -1,0 +1,39 @@
+<h2 mat-dialog-title style="font-weight: bold;text-align: center;margin-bottom: 5px;">Cross References</h2>
+<h2 style="font-size:medium; font-weight: bold;text-align: center;margin-bottom: 5px;word-break: break-all;"><span *ngIf="data.meta.lang!='ENG'">({{data.meta.eng}}) </span>{{data.meta.ref}} </h2>
+
+<mat-dialog-content *ngIf="data.err==''" class="mat-typography">
+<div class="">
+    <div class="">
+    <div *ngFor="let passage of passages" >
+        <div *ngFor="let chapter of passage.content" [align] =align>            
+            <div class="card">
+                <div class="card-body">
+                    <a (click)="chapterClick(passage.book,chapter.chapter);" role="button" title="Click to read full chapter" style="text-decoration: none;font-size: 14px;" >
+                        <span [dir] = dir style="font-weight: bold;font-size: 14px;">{{passage.name}} {{chapter.chapter}}</span> 
+                        <span *ngIf="!isEng()" dir="ltr" style="font-weight: bold;font-size: 14px;"> &nbsp;({{passage.english}} {{chapter.chapter}})&nbsp;</span>
+                        
+                            <i class="fa fa-list"></i>
+                        </a>
+                    <p *ngFor="let verse of chapter.verses" [dir]=dir [align] = align style="font-size: 14px;margin-bottom: 0px;">
+                        <span style="font-size: 12px;font-weight: bold;">{{verse.verse}}.</span> {{verse.text}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>   
+ </div>
+</div>
+</mat-dialog-content>
+
+
+<mat-dialog-content *ngIf="data.err!=''">
+    <div class="card">
+        <div class="card-body">
+    <p> {{ data.err}} </p>
+    </div>
+    </div>
+    </mat-dialog-content>
+
+<mat-dialog-actions align="center" >
+    <button mat-button mat-dialog-close style="height: fit-content;font-size: 15px;">Close</button>
+</mat-dialog-actions>

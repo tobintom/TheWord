@@ -39,12 +39,21 @@ export class WordContentService {
     return this.http.get(url);
   }
 
+  getLangChapter(book: string, chapter: string, lang:string){       
+    var url = API_URL;
+    if(book && chapter && lang){
+      url = url +lang+ '/' + book + '/' + chapter;
+      return this.http.get(url);
+    }else
+    return null;    
+  }
+
   getNextChapter(book: string, chapter: string){       
     var url = API_URL + this.helper.getLang() + '/nextChapter';
     if(book && chapter){
-      url = url + '/' + book + '/' + chapter;
+      url = url +'?bookId='+book +'&chapter=' + chapter;
     }else{
-      url = url + '/01/1';
+      url = url +'?bookId=01&chapter=1';
     }
      
     return this.http.get(url);
@@ -53,11 +62,35 @@ export class WordContentService {
   getPreviousChapter(book: string, chapter: string){       
     var url = API_URL + this.helper.getLang() + '/previousChapter';
     if(book && chapter){
-      url = url + '/' + book + '/' + chapter;
+      url = url +'?bookId='+book +'&chapter=' + chapter;
     }else{
-      url = url + '/01/1';
+      url = url +'?bookId=01&chapter=1';
     }
     return this.http.get(url);
   }
   
+  getCrossReferences(book: string, chapter: string, verse: string){
+    var url = API_URL + this.helper.getLang() + '/crossreference?verse=';
+    if(book && chapter && verse){
+      url = url + book+' '+chapter+':'+verse
+    }
+    return this.http.get(url);
+  }
+
+  getPassages(passage: string){
+    var url = API_URL + this.helper.getLang() + '/passage?passage=';
+    if(passage){
+      url = url + passage
+    }
+    return this.http.get(url);
+  }
+
+  getSearch(search: string){
+    var url = API_URL + this.helper.getLang() + '/search?key=';
+    if(search){
+      url = url + search;
+    }
+    return this.http.get(url);
+  }
+
 }

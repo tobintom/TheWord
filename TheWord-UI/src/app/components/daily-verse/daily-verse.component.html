@@ -21,12 +21,13 @@
                 <p *ngIf="!isEng()" dir="ltr">{{englishName}} {{chapter}}</p>
             </header>
             <div class="content">
-                <p [dir]=dir [align] = align>
-                    <label *ngFor="let verse of verses" >
-                    {{verse.verse}} {{verse.text}}
-                    </label>
-                </p>
-            </div>
+             
+                    <p [dir]=dir [align] = align>
+                        <label *ngFor="let verse of verses" >
+                            {{verse.verse}} {{verse.text}}
+                        </label>
+                    </p>
+            </div>            
         </section>
     </div>
 </section>
