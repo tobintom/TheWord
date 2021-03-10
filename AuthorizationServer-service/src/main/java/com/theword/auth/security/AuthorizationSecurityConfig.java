@@ -33,6 +33,7 @@ public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
     private String groupBase;
 	
     private static final String OAUTH_PATTERN = "/oauth/token";
+    private static final String OAUTH_ZUUL_PATTERN = "/authorizationserver-service/token";
     
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,7 +55,8 @@ public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.cors().and()
             .authorizeRequests()
-                .antMatchers(OAUTH_PATTERN).permitAll().and()
+                .antMatchers(OAUTH_PATTERN).permitAll()
+                .antMatchers(OAUTH_ZUUL_PATTERN).permitAll().and()
                 .authorizeRequests()
                 .anyRequest().authenticated();
     }

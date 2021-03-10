@@ -14,13 +14,29 @@ import com.theword.zuuledge.filters.PostFilter;
 import com.theword.zuuledge.filters.PreFilter;
 import com.theword.zuuledge.filters.RouteFilter;
 
+import springfox.documentation.swagger.web.DocExpansion;
+import springfox.documentation.swagger.web.ModelRendering;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger.web.UiConfigurationBuilder;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableZuulProxy
+@EnableSwagger2
 public class ZuulEdgeProxyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulEdgeProxyApplication.class, args);
+	}
+	
+	@Bean
+	UiConfiguration uiConfig() {
+		return UiConfigurationBuilder.builder().docExpansion(DocExpansion.LIST)
+				.defaultModelRendering(ModelRendering.EXAMPLE)
+				.supportedSubmitMethods(UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS)
+				.defaultModelsExpandDepth(-1)				
+				.build(); 
 	}
 	
 	@Bean

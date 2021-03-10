@@ -23,29 +23,39 @@
             <div class="content">
                 <div *ngIf="search==='false'">
                     <p>
-                    Curabitur eget semper ante. Morbi eleifend ultricies est, a blandit diam vehicula vel. Vestibulum porttitor nisi quis viverra hendrerit. Suspendisse vel volutpat nibh, vel elementum lacus. Maecenas commodo pulvinar dui, at cursus metus imperdiet vel. Vestibulum et efficitur urna. Duis velit nulla, interdum sed felis sit amet, facilisis auctor nunc. Cras luctus urna at risus feugiat scelerisque nec sed diam. 
-                    </p>    
+                        Search for scripture passages using the book name, chapter and verse. E.g. <span style="font-weight: bold;">John 3:16</span> retrieves John chapter 3, verse 16. Verses can also be a range, e.g. <span style="font-weight: bold;">John 3:16-20</span> retrieves John chapter 3 verses 16 to 20.
+                        Multiple passages should be separated by semicolon(;). E.g.                        
+                        <span style="font-weight: bold;">John 3:16;Genesis 1:1-5;2 Peter 1:5</span>                       
+                        The results are ordered according to the order of the books of the Bible. The book name can be in English or in the language selected in the Home page. E.g. If the language selected in the Home page is Spanish, searching 
+                        for <span style="font-weight: bold;">John 3:16</span> and <span style="font-weight: bold;">Juan 3:16</span> retrieves the same passage.
+                    </p> 
+                    
+                    <p>
+                        Search also by text. Results will show Bible passages that match the entered text. E.g. searching for '<span style="font-weight: bold;">Ten Horns</span>' will retrieve Bible passages that contain the text. Only the first 20 matches are returned. 
+                        If searching by text, the text needs to be in the language selected in the Home page. 
+
+                    </p> 
                 </div>
                 <div *ngIf="search==='true'">
                     <div *ngIf="passages?.length>0">
                     <div *ngFor="let passage of passages" >
                         <div *ngFor="let chapter of passage.content" [align] = align>
-                        <a (click)="chapterClick(passage.book,chapter.chapter);" role="button" title="Click to read full chapter" style="text-decoration: none;font-size: 14px;" >
+                        <a (click)="chapterClick(passage.book,chapter.chapter);" role="button" title="Click to read full chapter" style="text-decoration: none;font-size: 15px;" >
                             <span [dir] = dir style="font-weight: bold;">{{passage.name}} {{chapter.chapter}}</span> 
                             <span *ngIf="!isEng()" dir="ltr" style="font-weight: bold;"> &nbsp;({{passage.english}} {{chapter.chapter}})&nbsp;</span>
                             
                                 <i class="fa fa-list"></i>
                             </a>
-                        <p *ngFor="let verse of chapter.verses" [dir]=dir [align] = align style="font-size: 16px;margin-bottom: 0px;">
-                            <span style="font-size: 14px;font-weight: bold;">{{verse.verse}}.</span> {{verse.text}}
-                        </p>
+                        <div *ngFor="let verse of chapter.verses" [dir]=dir [align] = align style="font-size: 15px;margin-bottom: 0px;">
+                            <span style="font-size: 12px;font-weight: bold;">{{verse.verse}}.</span> <p [innerHTML]="verse.text | boldSpan:searchInput"></p>
+                        </div>
                         </div>
                     </div>
                     </div>
                     <div *ngIf="passages.length==0">
                         <div class="card">
                             <div class="card-body">
-                                <p style="font-size: 16px;font-weight: bold;">No data found</p>
+                                <p style="font-size: 16px;font-weight: bold;">We couldn't find anything to match your criteria.</p>
                             </div>
                         </div>
                     </div>
@@ -59,10 +69,10 @@
 <footer id="footer">
     <div class="container">
         <ul class="icons">
-            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+            <li><a href="https://twitter.com/digitalTheWord" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="https://www.facebook.com/theworddigital" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="https://www.instagram.com/digitaltheword" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a role="button" placement="top" ngbPopover="Email us at thewordhelp@gmail.com" popoverTitle="Contact Us" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
         </ul>
     </div>
     <div class="copyright">

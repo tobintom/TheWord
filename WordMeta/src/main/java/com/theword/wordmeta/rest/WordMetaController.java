@@ -19,14 +19,26 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import com.theword.wordmeta.config.BibleResponse;
+import com.theword.wordmeta.config.BooksResponse;
+import com.theword.wordmeta.config.ChaptersResponse;
+import com.theword.wordmeta.config.VersesResponse;
 import com.theword.wordmeta.model.Bible;
 import com.theword.wordmeta.model.Book;
 import com.theword.wordmeta.model.CrossReference;
 import com.theword.wordmeta.repository.BibleRepository;
 import com.theword.wordmeta.repository.DataComponent;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/theword/v1/bibles")
+@Api(produces="application/json",value="The Word Meta API")
 public class WordMetaController {
 
 	@Autowired
@@ -43,7 +55,12 @@ public class WordMetaController {
 	 * @param bibleId
 	 * @return
 	 */
-	@RequestMapping(value="",method=RequestMethod.GET, produces={"application/json; charset=UTF-8"})
+	@ApiOperation(value="Retrieves the available Bible languages",notes="Returns all the Bible languages supported. Each response line has the language code,"
+			+ "language name and the text direction of the language in written form.")
+	 @ApiResponses({
+		    @ApiResponse(code=200,message="success",response=BibleResponse.class)
+	    })
+	@RequestMapping(value="/list",method=RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public ResponseEntity<Object> getBibles(){		
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode node = mapper.createObjectNode();
@@ -76,8 +93,16 @@ public class WordMetaController {
 	 * @param bibleId
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves the available Bible Books of a language",notes="Retrieves all the books for the language. The top level response has the "
+			+ "language code, language name and text direction. It has an array of books. Each book has a code that is the same in any language."
+			+ " Each book has the code, name and its equivalent english name.")
+	 @ApiResponses({
+		    @ApiResponse(code=200,message="success",response=BooksResponse.class)
+	    })
 	@RequestMapping(value="/{bibleId}/books",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getBibleBooks(@PathVariable String bibleId){
+	public ResponseEntity<Object> getBibleBooks(
+			@ApiParam(value = "Code that represents the language", required = true, example="ENG") 
+			@PathVariable String bibleId){
 		Bible bible = null;		 
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode objectNode = mapper.createObjectNode();
@@ -116,8 +141,17 @@ public class WordMetaController {
 	 * @param bookId
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves the available chapters of the selected book.",notes="The top level response has the Bible book code, "
+			+ "name, english name. It has an array of chapters.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=ChaptersResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/{bookId}/chapters",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getBookChapters(@PathVariable String bibleId,@PathVariable String bookId){
+	public ResponseEntity<Object> getBookChapters(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable String bibleId,
+			@ApiParam(value = "Code that represents the Bible Book", required = true, example="01")
+			@PathVariable String bookId){
 		Book book = null;
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode objectNode = mapper.createObjectNode();
@@ -157,8 +191,19 @@ public class WordMetaController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves the available verses of the selected book and chapter.",notes="The top level response has the Bible book code, "
+			+ "name, english name and chapter. It has an array of verses.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=VersesResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/{bookId}/{chapter}/verses",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getChapterVerses(@PathVariable String bibleId,@PathVariable String bookId,@PathVariable String chapter){
+	public ResponseEntity<Object> getChapterVerses(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable String bibleId,
+			@ApiParam(value = "Code that represents the Bible Book", required = true, example="01")
+			@PathVariable String bookId,
+			@ApiParam(value = "Chapter of Bible Book",required = true, example="1")
+			@PathVariable String chapter){
 		Book book = null;
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode objectNode = mapper.createObjectNode();
@@ -197,6 +242,7 @@ public class WordMetaController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Returns raw cross reference. Hidden from swagger documentation.",hidden=true)
 	@RequestMapping(value="/rawcrossreference",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
 	public ResponseEntity<Object> getRawCrossRefence(@RequestParam(required=true,name="verse") String verse){
 		CrossReference crossReference = new CrossReference();		  

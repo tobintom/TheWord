@@ -33,8 +33,8 @@ export class SearchComponent implements OnInit {
 
   searchVal(val: any){
     this.search = 'true';
-    var doSearch = true;
-    this.passages = [];
+    var doSearch = true; 
+    this.passages = [];   
     let regExpression = new RegExp('\\d{2}\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?');
     let regChapterVerse = new RegExp('\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?');
     //check whether to do search
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
       doSearch = false;
     }
 
-    if(val && val.trim().length>0){
+    if(val && val.trim().length>0){      
     this.contentService.getSearch(val).subscribe(data=>{
         if(data && data["passages"]){
           this.dir = data["dir"];
@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
     if(doSearch){
       this.contentService.getPassages(val).subscribe(data=>{
         if(data && data["passages"]){
-          this.dir = data["dir"];
+          this.dir = data["dir"];          
           this.passages=(data["passages"]);
           if(this.dir==='LTR'){
             this.align = "left";

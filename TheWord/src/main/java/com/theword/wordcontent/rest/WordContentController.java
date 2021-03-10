@@ -27,16 +27,25 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import com.theword.wordcontent.config.ChapterResponse;
+import com.theword.wordcontent.config.PassageResponse;
 import com.theword.wordcontent.model.Bible;
 import com.theword.wordcontent.model.Book;
 import com.theword.wordcontent.model.Content;
 import com.theword.wordcontent.model.Verse;
 import com.theword.wordcontent.model.VerseText;
 import com.theword.wordcontent.repository.ContentRepository;
-import com.theword.wordcontent.repository.DataComponent; 
+import com.theword.wordcontent.repository.DataComponent;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/theword/v1/bible")
+@Api(produces="application/json",value="The Word Content API")
 public class WordContentController {
 	
 	@Autowired
@@ -63,8 +72,22 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+    @ApiOperation(value="Retrieves the verse text of the selected Book, chapter and verse.",notes="Returns the verse text of the selected Bible language, Book, chapter and verse."
+    		+ " The Bible ID is the language code, the bookid is the book code, chapter and verse number. e.g /ENG/01/1/1 retrieves the english"
+    		+ " text of Genesis 1:1")
+    @ApiResponses({
+	    @ApiResponse(code=200,message="success",response=ChapterResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/{bookId}/{chapter}/{verseNumber}",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getChapterVerse(@PathVariable String bibleId,@PathVariable String bookId,@PathVariable String chapter,@PathVariable String verseNumber){
+	public ResponseEntity<Object> getChapterVerse(@ApiParam(value = "Code that represents the language",
+	        required = true, example="ENG") 
+	@PathVariable String bibleId,
+	@ApiParam(value = "Code that represents the Bible Book", required = true, example="01")
+	@PathVariable String bookId,
+	@ApiParam(value = "Chapter of Bible Book",required = true, example="1")
+	@PathVariable String chapter,
+	@ApiParam(value = "Verse to be retrieved",required = true, example="1")
+	@PathVariable String verseNumber){
 		Content content = null;
 		Bible bible = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -107,8 +130,19 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
-	@RequestMapping(value="/{bibleId}/{bookId}/{chapter}",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getChapterVerses(@PathVariable String bibleId,@PathVariable String bookId,@PathVariable String chapter){
+    @ApiOperation(value="Retrieves all the verses of a Bible chapter.",notes="Returns all the verse text of the selected Bible language, Book and chapter."
+    		+ " The Bible ID is the language code, the bookid is the book code and the selected chapter. e.g. /ENG/01/1 retrieves the english text of Genesis 1.")
+    @ApiResponses({
+	    @ApiResponse(code=200,message="success",response=ChapterResponse.class)
+    })
+    @RequestMapping(value="/{bibleId}/{bookId}/{chapter}",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getChapterVerses(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable String bibleId,
+			@ApiParam(value = "Code that represents the Bible Book",required = true, example="01") 
+			@PathVariable String bookId,
+			@ApiParam(value = "Chapter of the Bible Book",required = true, example="1") 
+			@PathVariable String chapter){
 		Content content = null;
 		Bible bible = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -150,9 +184,20 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
-	@RequestMapping(value="/{bibleId}/nextChapter",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getNextChapterVerses(@PathVariable String bibleId,
-			@RequestParam(required=true,name="bookId") String bookId, @RequestParam(required=true,name="chapter") String chapter){
+    @ApiOperation(value="Retrieves all the verses of the next Bible chapter, from the submitted one.",notes="Returns all the verse text of the next chapter of selected Bible language, Book and chapter."
+    		+ " The Bible ID is the language code. Request parameters are the Book Code and current chapter. E.g. /ENG/nextChapter?bookId=01&chapter=1,  returns"
+    		+ " all the english text of Genesis chapter 2.")
+    @ApiResponses({
+	    @ApiResponse(code=200,message="success",response=ChapterResponse.class)
+    })
+    @RequestMapping(value="/{bibleId}/nextChapter",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
+	public ResponseEntity<Object> getNextChapterVerses(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable String bibleId,
+			@ApiParam(value = "Code that represents the Bible Book",required = true, example="01") 
+			@RequestParam(required=true,name="bookId") String bookId, 
+			@ApiParam(value = "Current Chapter of the Bible Book",required = true, example="1") 
+			@RequestParam(required=true,name="chapter") String chapter){
 		Content content = null;
 		Bible bible = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -212,9 +257,20 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves all the verses of the previous Bible chapter, from the submitted one.",notes="Returns all the verse text of the previous chapter of selected Bible language, Book and chapter."
+    		+ " The Bible ID is the language code. Request parameters are the Book Code and current chapter. E.g. /ENG/previousChapter?bookId=01&chapter=2, returns"
+    		+ " the english text of Genesis chapter 1.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=ChapterResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/previousChapter",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getPreviousChapterVerses(@PathVariable String bibleId,
-			@RequestParam(required=true,name="bookId") String bookId, @RequestParam(required=true,name="chapter") String chapter){
+	public ResponseEntity<Object> getPreviousChapterVerses(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable String bibleId,
+			@ApiParam(value = "Code that represents the Bible Book",required = true, example="01") 
+			@RequestParam(required=true,name="bookId") String bookId, 
+			@ApiParam(value = "Current Chapter of the Bible Book",required = true, example="2") 
+			@RequestParam(required=true,name="chapter") String chapter){
 		Content content = null;
 		Bible bible = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -276,8 +332,17 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves all the cross references in the Bible of a selected verse.",notes="Retrieves all the cross references in the Bible of a selected verse. The cross reference has to be a Book Chapter:verse."
+			+ " The book has to be the book code. e.g. ENG/crossreference?verse=01 1:1, returns all the available cross references in english for "
+			+ "Genesis 1:1.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/crossreference",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getCrossRefence(@PathVariable(required=true,name="bibleId") String bibleId,
+	public ResponseEntity<Object> getCrossRefence(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable(required=true,name="bibleId") String bibleId,
+			@ApiParam(value = "Verse of the Bible for Cross Reference Lookup",required = true, example="01 1:1") 
 			@RequestParam(required=true,name="verse") String verse){ 
 		List<String> passageCollection;
 		String regExpression = "\\d{2}\\s+\\d{1,3}:\\d{1,3}";
@@ -373,8 +438,19 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves all the passages submitted.",notes="Retrieves all the passages submitted. The input can be with book code or book name (in corresponding language)."
+			+ " Multiple passages "
+			+ "need to be separated by ;"
+			+ "e.g /ENG/passage?passage=john 1:1-2;01 1:12-25;genesis 1:1  returns the english text of John 1 verses 1 to 2,"
+			+ " Genesis 1 verses 12 to 25 and also Genesis 1 verse 1.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/passage",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getPassageText(@PathVariable(required=true,name="bibleId") String bibleId,
+	public ResponseEntity<Object> getPassageText(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable(required=true,name="bibleId") String bibleId,
+			@ApiParam(value = "Passage(s) to be retrieved",required = true, example="01 1:1;John 3:16;Matthew 1:1-10") 
 			@RequestParam(required=true,name="passage") String passage){ 
 		List<String> passageCollection;
 		String regExpression = "\\d{2}\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?";
@@ -464,9 +540,22 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves all the passages that contain a key word submitted.",notes="Retrieves all the passages that contain a key word submitted. "
+			+ "e.g /ENG/search?key=ten horns  returns the english text of all passages that "
+			+ "contain the phrase 'ten horns'. Options parameters: strict (default true) indicates strict/partial search."
+			+ " limit (default 20) the number of maximum passages to return.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/search",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getSearchPassages(@PathVariable(required=true,name="bibleId") String bibleId,
-			@RequestParam(required=true,name="key") String key, @RequestParam(required=false,name="strict") String strict,
+	public ResponseEntity<Object> getSearchPassages(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable(required=true,name="bibleId") String bibleId,
+			@ApiParam(value = "Key Phrase to search",required = true, example="Ten Horns") 
+			@RequestParam(required=true,name="key") String key, 
+			@ApiParam(value = "Flag to determine strict search",required = false, example="true", defaultValue="true") 
+			@RequestParam(required=false,name="strict") String strict,
+			@ApiParam(value = "Maximum matched verses to return",required = false, example="25", defaultValue="20") 
 			@RequestParam(required=false,name="limit") String limit){ 
 		
 		List<VerseText> verses = new ArrayList<VerseText>();
@@ -515,8 +604,15 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves a Bible verse of the day.",notes="Retrieves a Bible verse of the day. Date parameter is optional.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/dailyverse",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getDailyVerse(@PathVariable(required=true,name="bibleId") String bibleId,
+	public ResponseEntity<Object> getDailyVerse(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable(required=true,name="bibleId") String bibleId,
+			@ApiParam(value = "Date",required = false, example="01/01/2020") 
 			@RequestParam(required=false,name="date") String date){ 
 		List<String> passageCollection;
 		String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";		
@@ -589,8 +685,15 @@ public class WordContentController {
 	 * @param chapter
 	 * @return
 	 */
+	@ApiOperation(value="Retrieves a random Bible verse.",notes="Retrieves a random Bible verse. Date parameter is optional.")
+	@ApiResponses({
+	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
+    })
 	@RequestMapping(value="/{bibleId}/randomDailyVerse",method=RequestMethod.GET,produces={"application/json; charset=UTF-8"})
-	public ResponseEntity<Object> getRandomDailyVerse(@PathVariable(required=true,name="bibleId") String bibleId,
+	public ResponseEntity<Object> getRandomDailyVerse(
+			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
+			@PathVariable(required=true,name="bibleId") String bibleId,
+			@ApiParam(value = "Date",required = false, example="01/01/2020") 
 			@RequestParam(required=false,name="date") String date){ 
 		List<String> passageCollection;
 		String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";		

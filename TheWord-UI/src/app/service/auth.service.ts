@@ -42,7 +42,7 @@ export class AuthService {
       .set('username', USER_NAME)
       .set('password', PASSWORD)
       .set('grant_type', 'password');
-      console.warn('ONE');
+      
     return this.http.post<any>(API_URL + 'oauth/token', body, HTTP_OPTIONS)
       .pipe(
         tap(res => {

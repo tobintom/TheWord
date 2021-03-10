@@ -4,8 +4,7 @@ import { AppHelper } from "./app.helper";
 
 const helper = new JwtHelperService();
 
-export function appInitializer(auth: AuthService, appHelper: AppHelper) {    
-    console.warn('Initialize');
+export function appInitializer(auth: AuthService, appHelper: AppHelper) {        
         return () => new Promise(resolve => {
             // initialize
             

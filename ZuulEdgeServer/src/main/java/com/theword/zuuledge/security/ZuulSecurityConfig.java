@@ -16,6 +16,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -25,6 +28,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class ZuulSecurityConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String ROOT_PATTERN = "/theword/v1/**";
+	private static final String SWAGGER_CONTENT_PATTERN = "/swagger-content/theword/v1/**";
+	private static final String SWAGGER_META_PATTERN = "/swagger-meta/theword/v1/**";
 	private static final String OAUTH_PATTERN = "/theword/oauth/token";
 	
 	@Value("${app.security.cert-name}")
@@ -41,12 +46,40 @@ public class ZuulSecurityConfig extends ResourceServerConfigurerAdapter {
 	
 	@Override
     public void configure(HttpSecurity http) throws Exception {
-		http	.authorizeRequests()
-				.antMatchers(HttpMethod.POST,OAUTH_PATTERN).permitAll().and()
+		http	
+		.cors().and()
+		.authorizeRequests()
+				.antMatchers(HttpMethod.POST,OAUTH_PATTERN).permitAll()
+				.antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
+                .antMatchers(HttpMethod.GET,"/webjars/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger-meta/v2/api-docs/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger-content/v2/api-docs/**").permitAll()
+				.and()
         		.authorizeRequests()
                 .antMatchers(HttpMethod.GET, ROOT_PATTERN).access("#oauth2.hasScope('trust')")
-                .antMatchers(HttpMethod.POST, ROOT_PATTERN).access("#oauth2.hasScope('trust')");
+                .antMatchers(HttpMethod.POST, ROOT_PATTERN).access("#oauth2.hasScope('trust')")
+                .antMatchers(HttpMethod.GET, SWAGGER_CONTENT_PATTERN).access("#oauth2.hasScope('trust')")
+                .antMatchers(HttpMethod.GET, SWAGGER_META_PATTERN).access("#oauth2.hasScope('trust')");
     }
+	
+	 @Bean
+     CorsConfigurationSource corsConfigurationSource() {
+         final UrlBasedCorsConfigurationSource source = new     UrlBasedCorsConfigurationSource();
+         final CorsConfiguration config = new CorsConfiguration();
+         config.setAllowCredentials(true);
+         config.addAllowedOrigin(CorsConfiguration.ALL);
+         config.addAllowedHeader(CorsConfiguration.ALL);
+         config.addAllowedMethod("OPTIONS");
+         config.addAllowedMethod("HEAD");
+         config.addAllowedMethod("GET");
+         config.addAllowedMethod("PUT");
+         config.addAllowedMethod("POST");
+         config.addAllowedMethod("DELETE");
+         config.addAllowedMethod("PATCH");
+         source.registerCorsConfiguration("/**", config);
+         return source;
+     }
 	
 	@Bean
     public TokenStore tokenStore() {

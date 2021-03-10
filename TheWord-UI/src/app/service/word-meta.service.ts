@@ -17,7 +17,7 @@ export class WordMetaService {
     private helper: AppHelper) { }
 
     getLanguages(){         
-     return this.http.get<any>(API_URL);           
+     return this.http.get<any>(API_URL+'/list');           
     }
 
     getBooks(){

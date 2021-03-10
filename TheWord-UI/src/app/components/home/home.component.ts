@@ -163,8 +163,15 @@ export class HomeComponent implements OnInit {
     this.appHelper.saveBook(this.selectedbook);    
     this.appHelper.saveChapter(this.selectedchapter);
 
+     //get Books for selected language
+     this.metaService.getBooks().subscribe(data=>{
+      if(data && data["books"]){
+        this.books = data["books"];
+      }
+    });
+
     //Get Content for selected languages/book/chapter
-    this.contentService.getChapter(this.appHelper.getBook(),this.appHelper.getChapter()).subscribe(data=>{
+    this.contentService.getChapter(this.selectedbook,this.selectedchapter).subscribe(data=>{
       if(data && data["verses"]){        
         this.book = data["name"];
         this.englishName = data["english"];
@@ -172,27 +179,23 @@ export class HomeComponent implements OnInit {
         this.dir = data["dir"];     
         this.lang = data["id"];   
         this.verses = data["verses"];
-        this.icon = '../../../assets/images/books/' + data["number"] + '.png';
+       // this.icon = '../../../assets/images/books/' + data["number"] + '.png';
         if(this.dir==='LTR'){
             this.align = "left";
         }else{
             this.align = "right";
         }
+       
       }
     });  
 
-    //get Books for selected language
-    this.metaService.getBooks().subscribe(data=>{
-      if(data && data["books"]){
-        this.books = data["books"];
-      }
-    });
+    
   //Get Chapters of the selected book
-  this.metaService.getChapters().subscribe(data=>{
-    if(data && data["chapters"]){
-      this.chapters =  data["chapters"].map(elt => String(elt));     
-    }
-  });     
+  // this.metaService.getChapters().subscribe(data=>{
+  //   if(data && data["chapters"]){
+  //     this.chapters =  data["chapters"].map(elt => String(elt));     
+  //   }
+  // });     
   }
 
   changeBook(val: any){

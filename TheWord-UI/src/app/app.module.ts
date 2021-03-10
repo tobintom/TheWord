@@ -19,6 +19,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from '@angular/forms';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { SpinnerOverlayComponent } from './components/spinner-overlay/spinner-overlay.component';
+import { BoldSpanPipe } from './service/bold-span.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SpinnerOverlayComponent } from './components/spinner-overlay/spinner-ov
     DailyVerseComponent,
     SearchComponent,
     DialogComponent,
-    SpinnerOverlayComponent
+    SpinnerOverlayComponent,
+    BoldSpanPipe
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@
              
                     <p [dir]=dir [align] = align>
                         <label *ngFor="let verse of verses" >
-                            {{verse.verse}} {{verse.text}}
+                           <strong style="font-weight: bold;">{{verse.verse}}.</strong> {{verse.text}}
                         </label>
                     </p>
             </div>            
@@ -36,10 +36,10 @@
 <footer id="footer">
     <div class="container">
         <ul class="icons">
-            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+            <li><a href="https://twitter.com/digitalTheWord" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="https://www.facebook.com/theworddigital" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="https://www.instagram.com/digitaltheword" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a role="button" placement="top" ngbPopover="Email us at thewordhelp@gmail.com" popoverTitle="Contact Us" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
         </ul>
     </div>
     <div class="copyright">

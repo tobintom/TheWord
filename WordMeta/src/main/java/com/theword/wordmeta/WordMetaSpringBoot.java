@@ -13,5 +13,6 @@ public class WordMetaSpringBoot {
 	public static void main(String[] args) {
 		SpringApplication.run(WordMetaSpringBoot.class, args);
 	}
+	
 }
 

@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { catchError, filter, finalize, switchMap, take, tap } from 'rxjs/operators';
 import { SpinnerServiceService } from './spinner-service.service';
+import { AppHelper } from './app.helper';
 
 const helper = new JwtHelperService();
 
@@ -19,7 +20,8 @@ export class ServiceInterceptorInterceptor implements HttpInterceptor {
   urlsToNotUse: Array<string>;
 
   constructor(public auth: AuthService,
-    private readonly spinnerOverlayService: SpinnerServiceService) {
+    private readonly spinnerOverlayService: SpinnerServiceService,
+    private appHelper: AppHelper) {
     this.urlsToNotUse= [
       'oauth/token' 
     ];
@@ -27,15 +29,23 @@ export class ServiceInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.isValidRequestForInterceptor(request.url)) {
-      const spinnerSubscription: Subscription = this.spinnerOverlayService.spinner$.subscribe();
+      const spinnerSubscription: Subscription = this.spinnerOverlayService.spinner$.subscribe();        
           return next.handle(this.addToken(request,this.auth.getToken())).pipe(
             catchError(error => {
-               
-              if (error instanceof HttpErrorResponse ) {                
+               console.error(error)
+              if (error instanceof HttpErrorResponse && error.status===401) {                
                 this.auth.authenticate().subscribe(()=>{
-                   // location.reload();
+                   location.reload();
                 });
-              } else {
+              }if (error instanceof HttpErrorResponse && error.status===500) {                
+                 //Reset parameters
+                 this.appHelper.saveLang('ENG');
+                 this.appHelper.saveBook('01');
+                 this.appHelper.saveChapter('1');
+                   location.reload();
+                
+              }
+               else {
                 return throwError(error);
               }
               return throwError(error);
