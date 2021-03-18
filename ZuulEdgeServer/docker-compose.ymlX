@@ -4,14 +4,11 @@ services:
       container_name: Word-UI
       build:
             context: ../TheWord-UI
-            dockerfile: ./WORD-UI-DOCKERFILE-PROD
-      image: tobintom/word-ui:latest     
+            dockerfile: ./WORD-UI-DOCKERFILE
+      image: word-ui:latest     
       ports:
       - "80:80"
       - "443:443"
-      volumes:
-       - /etc/letsencrypt/:/etc/letsencrypt/
-       - /usr/share/nginx/html:/usr/share/nginx/html
       networks:
             - theword-network    
     eureka-server:
@@ -19,12 +16,12 @@ services:
         build:
             context: ../EurekaServer-service
             dockerfile: ./EUREKA-SERVER-DOCKERFILE
-        image: tobintom/eureka-server:latest        
+        image: eureka-server:latest        
         ports: 
             - "3000:3000"
         environment: 
               SERVER_PORT: 3000
-              EUREKA_URL: http://45.79.54.175:3000/eureka/
+              EUREKA_URL: http://192.168.99.100:3000/eureka/
         networks: 
             - theword-network
     AuthorizationServer-service:
@@ -32,15 +29,15 @@ services:
         build:
             context: ../AuthorizationServer-service
             dockerfile: ./AUTH-SERVER-DOCKERFILE
-        image: tobintom/authorization-server:latest
+        image: authorization-server:latest
         entrypoint: /opt/lib/AuthorizationStartup.sh        
         ports:
             - "4000:4000"
         environment: 
               SERVER_PORT: 4000
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka  
-              LDAP_URL: ldap://45.79.54.175:389/dc=theword,dc=org
-              EUREKA_URL: http://45.79.54.175:3000/eureka/
+              LDAP_URL: ldap://192.168.99.100:389/dc=theword,dc=org
+              EUREKA_URL: http://192.168.99.100:3000/eureka/
               CLIENT_NAME: theWord-client
               CLIENT_SECRET: secret
               KEY_STORE_PASS: t0b1nt0m
@@ -58,17 +55,17 @@ services:
         build:
             context: ../TheWord
             dockerfile: ./WORD-SERVICE-DOCKERFILE
-        image: tobintom/wordcontent-service:latest
+        image: wordcontent-service:latest
         entrypoint: /opt/lib/Wordstartup.sh        
         ports:
             - "3010-3014:3010"
         environment: 
               SERVER_PORT: 3010
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
-              MONGODB_HOST: 45.79.54.175
+              MONGODB_HOST: 192.168.99.100
               MONGODB_PORT: 37020
-              EUREKA_URL: http://45.79.54.175:3000/eureka/
-              SWAGGER_AUTH: http://thedigitalword.org:5000/theword
+              EUREKA_URL: http://192.168.99.100:3000/eureka/
+              SWAGGER_AUTH: http://192.168.99.100:5000/theword
               SWAGGER_ID: theWord-client
               SWAGGER_PASS: secret
               MONGODB_AUTH_DB: admin
@@ -85,23 +82,23 @@ services:
         build:
             context: ../WordMeta
             dockerfile: ./META-SERVICE-DOCKERFILE
-        image: tobintom/wordmeta-service:latest
+        image: wordmeta-service:latest
         entrypoint: /opt/lib/Metastartup.sh        
         ports:
             - "3001-3005:3001"
         environment: 
               SERVER_PORT: 3001
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
-              MONGODB_HOST: 45.79.54.175
+              MONGODB_HOST: 192.168.99.100
               MONGODB_PORT: 37020
-              EUREKA_URL: http://45.79.54.175:3000/eureka/
-              SWAGGER_AUTH: http://thedigitalword.org:5000/theword
+              EUREKA_URL: http://192.168.99.100:3000/eureka/
+              SWAGGER_AUTH: http://192.168.99.100:5000/theword
               SWAGGER_ID: theWord-client
               SWAGGER_PASS: secret
               MONGODB_AUTH_DB: admin
               MONGODB_USER: dbadmin
               MONGODB_PASS: t0b1nt0m
-              MONGODB_DB: BP              
+              MONGODB_DB: BP             
         networks:
             - theword-network
         links: 
@@ -113,14 +110,14 @@ services:
         build:
             context: .
             dockerfile: ZUUL-EDGE-DOCKERFILE
-        image: tobintom/zuulserver:latest
+        image: zuulserver:latest
         entrypoint: /opt/lib/Zuulstartup.sh                 
         ports:
             - "5000:5000"            
         environment: 
               SERVER_PORT: 5000
               EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:3000/eureka
-              EUREKA_URL: http://45.79.54.175:3000/eureka/
+              EUREKA_URL: http://192.168.99.100:3000/eureka/
         networks:
             - theword-network
         links:

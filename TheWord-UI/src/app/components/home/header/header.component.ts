@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {environment} from './../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,14 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 })
 export class HeaderComponent implements OnInit {
 
+  SWAGGER_URL: string;  
   private toggleButton: any;
   private nav: any;
     private sidebarVisible: boolean;
 
   constructor(public location: Location, private element : ElementRef, private renderer: Renderer2) { 
     this.sidebarVisible = false;
+    this.SWAGGER_URL = environment.SWAGGER_URL;
   }
 
   ngOnInit() {

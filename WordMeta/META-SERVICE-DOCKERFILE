@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
 MAINTAINER TOBIN_TOM
 COPY ./target/WordMeta-service-1.0.jar /opt/lib/
 COPY Metastartup.sh /opt/lib/Metastartup.sh

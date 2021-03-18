@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { AuthService } from './auth.service';
-
-const API_URL = 'http://192.168.99.100:5000/theword/v1/bibles';
+import {environment} from './../../environments/environment';
+ 
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +17,16 @@ export class WordMetaService {
     private helper: AppHelper) { }
 
     getLanguages(){         
-     return this.http.get<any>(API_URL+'/list');           
+     return this.http.get<any>(environment.META_API_URL+'/list');           
     }
 
     getBooks(){
-      var url = API_URL +'/'+ this.helper.getLang()+'/books';
+      var url = environment.META_API_URL +'/'+ this.helper.getLang()+'/books';
       return this.http.get(url);
     }
 
     getChapters(){
-      var url = API_URL +'/'+ this.helper.getLang()+'/'+this.helper.getBook()+'/chapters';
+      var url = environment.META_API_URL +'/'+ this.helper.getLang()+'/'+this.helper.getBook()+'/chapters';
       return this.http.get(url);
     }
 }

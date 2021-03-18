@@ -5,8 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap,catchError  } from 'rxjs/operators';
 import { AppHelper } from './app.helper';
 import { AuthService } from './auth.service';
-
-const API_URL = 'http://192.168.99.100:5000/theword/v1/bible/';
+import {environment} from './../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +17,19 @@ export class WordContentService {
     private helper: AppHelper) { }
 
   getDailyVerse(){   
-    return this.http.get(API_URL+ 
+    return this.http.get(environment.WORD_API_URL + 
                     this.helper.getLang() +
                           '/dailyverse');
   }
 
   getRandomDailyVerse(){   
-    return this.http.get(API_URL+ 
+    return this.http.get(environment.WORD_API_URL + 
                     this.helper.getLang() +
                           '/randomDailyVerse');
   }
 
   getChapter(book: string, chapter: string){       
-    var url = API_URL + this.helper.getLang();
+    var url = environment.WORD_API_URL + this.helper.getLang();
     if(book && chapter){
       url = url + '/' + book + '/' + chapter;
     }else{
@@ -40,7 +39,7 @@ export class WordContentService {
   }
 
   getLangChapter(book: string, chapter: string, lang:string){       
-    var url = API_URL;
+    var url = environment.WORD_API_URL;
     if(book && chapter && lang){
       url = url +lang+ '/' + book + '/' + chapter;
       return this.http.get(url);
@@ -49,7 +48,7 @@ export class WordContentService {
   }
 
   getNextChapter(book: string, chapter: string){       
-    var url = API_URL + this.helper.getLang() + '/nextChapter';
+    var url = environment.WORD_API_URL + this.helper.getLang() + '/nextChapter';
     if(book && chapter){
       url = url +'?bookId='+book +'&chapter=' + chapter;
     }else{
@@ -60,7 +59,7 @@ export class WordContentService {
   }
 
   getPreviousChapter(book: string, chapter: string){       
-    var url = API_URL + this.helper.getLang() + '/previousChapter';
+    var url = environment.WORD_API_URL + this.helper.getLang() + '/previousChapter';
     if(book && chapter){
       url = url +'?bookId='+book +'&chapter=' + chapter;
     }else{
@@ -70,7 +69,7 @@ export class WordContentService {
   }
   
   getCrossReferences(book: string, chapter: string, verse: string){
-    var url = API_URL + this.helper.getLang() + '/crossreference?verse=';
+    var url = environment.WORD_API_URL + this.helper.getLang() + '/crossreference?verse=';
     if(book && chapter && verse){
       url = url + book+' '+chapter+':'+verse
     }
@@ -78,7 +77,7 @@ export class WordContentService {
   }
 
   getPassages(passage: string){
-    var url = API_URL + this.helper.getLang() + '/passage?passage=';
+    var url = environment.WORD_API_URL + this.helper.getLang() + '/passage?passage=';
     if(passage){
       url = url + passage
     }
@@ -86,7 +85,7 @@ export class WordContentService {
   }
 
   getSearch(search: string){
-    var url = API_URL + this.helper.getLang() + '/search?key=';
+    var url = environment.WORD_API_URL + this.helper.getLang() + '/search?key=';
     if(search){
       url = url + search;
     }

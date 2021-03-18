@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  AUTH_URL:'http://192.168.99.100:5000/theword/',
+  OAUTH_CLIENT:'theWord-client',
+  OAUTH_SECRET:'secret',
+  USER_NAME:'56ae9949-fd44-4b8f-a92e-d70301063902',
+  PASSWORD:'dRx2FZEEPWQ3JWvJceJf8Bvm9vWqxXhA',
+  WORD_API_URL:'http://192.168.99.100:5000/theword/v1/bible/',
+  META_API_URL:'http://192.168.99.100:5000/theword/v1/bibles',
+  SWAGGER_URL: 'http://192.168.99.100:5000/swagger-ui.html'
 };
 
 /*

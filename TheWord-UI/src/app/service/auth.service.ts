@@ -4,16 +4,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap,catchError  } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import {environment} from './../../environments/environment';
 
 const helper = new JwtHelperService();
 
 const ACCESS_TOKEN = 'access_token';
 const REFRESH_TOKEN = 'refresh_token';
-const OAUTH_CLIENT = 'theWord-client';
-const OAUTH_SECRET = 'secret';
-const USER_NAME = '56ae9949-fd44-4b8f-a92e-d70301063902';
-const PASSWORD = 'dRx2FZEEPWQ3JWvJceJf8Bvm9vWqxXhA';
-const API_URL = 'http://192.168.99.100:5000/theword/';
+ 
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -21,7 +18,7 @@ const HTTP_OPTIONS = {
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Methods':'DELETE, POST, GET, OPTIONS',
     'Access-Control-Allow-Headers':'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
-    Authorization: 'Basic ' + btoa(OAUTH_CLIENT + ':' + OAUTH_SECRET)
+    Authorization: 'Basic ' + btoa(environment.OAUTH_CLIENT + ':' + environment.OAUTH_SECRET)
   })
 };
 
@@ -39,11 +36,11 @@ export class AuthService {
     this.removeToken();
     this.removeRefreshToken();
     const body = new HttpParams()
-      .set('username', USER_NAME)
-      .set('password', PASSWORD)
+      .set('username', environment.USER_NAME)
+      .set('password', environment.PASSWORD)
       .set('grant_type', 'password');
       
-    return this.http.post<any>(API_URL + 'oauth/token', body, HTTP_OPTIONS)
+    return this.http.post<any>(environment.AUTH_URL + 'oauth/token', body, HTTP_OPTIONS)
       .pipe(
         tap(res => {
           this.saveToken(res.access_token);          
@@ -59,7 +56,7 @@ export class AuthService {
     const body = new HttpParams()
       .set('refresh_token', this.getRefreshToken())
       .set('grant_type', 'refresh_token');
-    return this.http.post<any>(API_URL + 'oauth/token', body, HTTP_OPTIONS)
+    return this.http.post<any>(environment.AUTH_URL + 'oauth/token', body, HTTP_OPTIONS)
       .pipe(
         tap(res => {
           this.removeToken();

@@ -71,12 +71,11 @@ public class SwaggerConfig {
                 		+ "\n 1. Email us at thewordhelp@gmail.com to get a free ID and Password."
                 		+ "\n 2. Click on the 'Authorize' green button on bottom right."
                 		+ "\n 3. For username and password, enter the values you get from us (after you are setup)"
-                		+ "\n 4. Select 'type' as Request Body. For client_id enter 'theWord-client' and for client_secret enter 'password' "
+                		+ "\n 4. Select 'type' as Request Body. For client_id enter 'theWord-client' and for client_secret enter 'secret' "
                 		+ "\n 5. Select the 'trust' scope checkbox and click on 'Authorize'. If successful, you will get a confirmation dialog. Close it and you will be able to run test API calls from this page.")
                 .version("v1")
-                .contact(new Contact("The Word Support", "websiteAddress", "thewordhelp@gmail.com"))
-                .license("MIT License")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")              
+                .contact(new Contact("The Word", "https://thedigitalword.org", "thewordhelp@gmail.com"))
+                .license("MIT License")                          
                 .build();
     }
 	
