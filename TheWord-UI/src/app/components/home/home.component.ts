@@ -6,14 +6,14 @@ import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
+  closed = false;
   selectedValue: string;
   languages: Array<any>;
   verses: Array<any>;
@@ -33,12 +33,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private contentService: WordContentService, private appHelper: AppHelper,
     private metaService: WordMetaService,private matDialog: MatDialog,
-    private router:Router) { 
+    private router:Router) {         
        this.bgurl = '../../../assets/images/bg/' + this.appHelper.randomNumber(1,16) + '.jpg';   
        this.lang = this.appHelper.getLang();    
        this.selectedbook = this.appHelper.getBook();
        this.selectedchapter = this.appHelper.getChapter();
   }
+
 
   ngOnInit(): void {    
     this.lang = this.appHelper.getLang();
@@ -83,6 +84,18 @@ export class HomeComponent implements OnInit {
     }
   });
 
+  }
+
+  isAlert(){
+    if(this.appHelper.getAlert() === 'Y'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  closeAlert(){
+    this.appHelper.saveAlert('N');
   }
 
   isEng(){
@@ -267,5 +280,7 @@ export class HomeComponent implements OnInit {
        });
        
   }
+
+  
 }
 

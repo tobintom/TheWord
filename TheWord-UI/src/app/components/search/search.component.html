@@ -15,10 +15,12 @@
 
     <!-- One -->
         <section id="one" class="wrap style1">
-            <header class="special">                
-                    <input type="tel" required (keyup.enter)="searchVal(searchInput);" matInput placeholder="Search" style="width: 90%;font-size: medium;" [(ngModel)]="searchInput">
-                    &nbsp;&nbsp;<a (click)="searchVal(searchInput);" role="button" title="Click to search" style="text-decoration: none;" >
-                    <i class="fa fa-search"></i></a>                       
+            <header class="special">
+                <div class="input-group">
+                    <input type="text" required (keyup.enter)="searchVal(searchInput);" matInput placeholder="Search" style="padding: 3px; width: 90%;border-color: black;height: inherit ;font-size: medium;" [(ngModel)]="searchInput">
+                    <span class="input-group-addon" id="addon"><a (click)="searchVal(searchInput);" role="button" title="Click to search" style="text-decoration: none;" >
+                        <i class="fa fa-search"></i></a></span>
+                </div>                                 
             </header>
             <div class="content">
                 <div *ngIf="search==='false'">
@@ -26,10 +28,10 @@
                         Search for scripture passages using the book name, chapter and verse. E.g. <span style="font-weight: bold;">John 3:16</span> retrieves John chapter 3, verse 16. Verses can also be a range, e.g. <span style="font-weight: bold;">John 3:16-20</span> retrieves John chapter 3 verses 16 to 20.
                         Multiple passages should be separated by semicolon(;). E.g.                        
                         <span style="font-weight: bold;">John 3:16;Genesis 1:1-5;2 Peter 1:5</span>                       
-                        The results are ordered according to the order of the books of the Bible. The book name can be in English or in the language selected in the Home page. E.g. If the language selected in the Home page is Spanish, searching 
+                        The book name can be in English or in the language selected in the Home page. E.g. If the language selected in the Home page is Spanish, searching 
                         for <span style="font-weight: bold;">John 3:16</span> and <span style="font-weight: bold;">Juan 3:16</span> retrieves the same passage.
                     </p> 
-                    
+                    <BR/>
                     <p>
                         Search also by text. Results will show Bible passages that match the entered text. E.g. searching for '<span style="font-weight: bold;">Ten Horns</span>' will retrieve Bible passages that contain the text. Only the first 20 matches are returned. 
                         If searching by text, the text needs to be in the language selected in the Home page. 

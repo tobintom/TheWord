@@ -26,6 +26,12 @@
 		line-height: 1;
 	}
 */
+.alert-dismissible .close {
+    position: relative !important;
+    height: max-content !important;
+    width: fit-content !important;     
+    padding: 2px 2px !important;    
+}
 .popover-header {
     padding: 10px 10px !important;
     margin-bottom: 0;
@@ -72,7 +78,7 @@
 .dim{opacity:1}.dim,.dim:focus,.dim:hover{transition:opacity .15s ease-in}.dim:focus,.dim:hover{opacity:.5}.dim:active{opacity:.8;transition:opacity .15s ease-out}
 .br-100{border-radius:100%}
 .ba{border-style:solid;border-width:1px}
-.b--black-20{border-color:rgba(0,0,0,0.2)}
+.b--black-20{border-color:rgba(0, 0, 0, 0)}
 .pa2{padding:0.5rem}
 .pa3-m{padding:0.5rem}
 .flex-l{display:flex}

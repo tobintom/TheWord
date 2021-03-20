@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 const LANG = 'lang';
+const ALERT = 'alert';
 const BOOK = 'book';
 const CHAPTER = 'chapter';
  var showSplash = true;
@@ -20,6 +21,19 @@ export class AppHelper{
          return 'eng';
      }
   }
+
+  getAlert(): string {
+    if(localStorage.getItem(ALERT)){
+        return localStorage.getItem(ALERT);
+    }else{
+        this.saveAlert("Y"); 
+        return 'Y';
+    }
+ }
+
+ saveAlert(alert: string): void {
+  localStorage.setItem(ALERT, alert);
+}
 
   saveLang(lang: string): void {
     localStorage.setItem(LANG, lang);

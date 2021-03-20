@@ -21,6 +21,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { SpinnerOverlayComponent } from './components/spinner-overlay/spinner-overlay.component';
 import { BoldSpanPipe } from './service/bold-span.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,
