@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.theword.thedigitalword.MainActivity">
+
+    <item  android:id="@+id/bookname"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+        android:title=""
+        android:icon="@drawable/ic_baseline_arrow_drop_down_24"/>
+    <item  android:id="@+id/lang"
+        app:showAsAction="always"
+        android:title=""
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_baseline_arrow_drop_down_24"/>
+</menu>

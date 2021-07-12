@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tweetButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_baseline_twitter_24"
+        app:strokeColor="@color/black"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="@color/white"
+        android:textColor="#1DA1F2"
+        android:text="Load Latest Tweets"
+        android:layout_alignParentTop="true"
+        android:gravity="center|center_vertical"/>
+    <WebView
+        android:paddingTop="10dp"
+        android:id="@+id/timeline_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tweetButton"/>
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/booktab2"
+    android:background="#f6f1f1">
+    <TextView
+        android:id="@+id/chapterbook"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/chaptergrid"
+        android:layout_below="@id/chapterbook"
+        android:layout_width="fill_parent"
+        android:numColumns="4"
+        android:layout_height="wrap_content"
+        android:stretchMode="columnWidth"
+        android:layout_gravity="center"
+        android:paddingBottom="50dp"
+        />
+
+</RelativeLayout>
