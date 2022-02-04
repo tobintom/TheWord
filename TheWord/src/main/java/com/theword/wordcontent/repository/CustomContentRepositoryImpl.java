@@ -111,17 +111,23 @@ private final MongoTemplate mongoTemplate;
 				String book = verse.split("\\s+")[0];
 				String chapter = verse.split("\\s+")[1].split(":")[0];
 				String verseNumber = verse.split("\\s+")[1].split(":")[1];
+				
 				verses = new ArrayList<String>();
-				String[] vparts = verseNumber.split("-");
-				if(vparts!=null && vparts.length==1) {
-					verses.add(vparts[0]);
-				}else {
-					int begin = Integer.valueOf(vparts[0]);
-					int end = Integer.valueOf(vparts[1]);
-					for(int i = begin;i<=end;i++) {
-						verses.add(String.valueOf(i));
+				
+				String[] nparts = verseNumber.split(",");
+				for(String part:nparts) {
+					String[] vparts = part.split("-");
+					if(vparts.length==1) {
+						verses.add(vparts[0]);
+					}else {
+						int begin = Integer.valueOf(vparts[0]);
+						int end = Integer.valueOf(vparts[1]);
+						for(int i = begin;i<=end;i++) {
+							verses.add(String.valueOf(i));
+						}				
 					}				
-				}			
+				}		
+				
 				//add to filter
 				filters.add(and(eq("book", book),eq("chapter", chapter),in("verse", verses)));
 			}					

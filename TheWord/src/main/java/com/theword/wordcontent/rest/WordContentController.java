@@ -441,7 +441,7 @@ public class WordContentController {
 	@ApiOperation(value="Retrieves all the passages submitted.",notes="Retrieves all the passages submitted. The input can be with book code or book name (in corresponding language)."
 			+ " Multiple passages "
 			+ "need to be separated by ;"
-			+ "e.g /ENG/passage?passage=john 1:1-2;01 1:12-25;genesis 1:1  returns the english text of John 1 verses 1 to 2,"
+			+ "e.g /ENG/passage?passage=john 1:1,2-5;01 1:12-25;genesis 1:1  returns the english text of John 1 verses 1 and 2 to 5,"
 			+ " Genesis 1 verses 12 to 25 and also Genesis 1 verse 1.")
 	@ApiResponses({
 	    @ApiResponse(code=200,message="success",response=PassageResponse.class)
@@ -450,11 +450,11 @@ public class WordContentController {
 	public ResponseEntity<Object> getPassageText(
 			@ApiParam(value = "Code that represents the language",required = true, example="ENG") 
 			@PathVariable(required=true,name="bibleId") String bibleId,
-			@ApiParam(value = "Passage(s) to be retrieved",required = true, example="01 1:1;John 3:16;Matthew 1:1-10") 
+			@ApiParam(value = "Passage(s) to be retrieved",required = true, example="01 1:1,2;John 3:16;Matthew 1:1-10") 
 			@RequestParam(required=true,name="passage") String passage){ 
 		List<String> passageCollection;
-		String regExpression = "\\d{2}\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?";
-		String regChapterVerse = "\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?";
+		String regExpression = "\\d{2}\\s+\\d{1,3}:((\\d{1,3}\\,(?=\\d{1,3}))|(\\d{1,3}\\-(?=\\d))|\\d{1,3})+";
+		String regChapterVerse = "\\s+\\d{1,3}:((\\d{1,3}\\,(?=\\d{1,3}))|(\\d{1,3}\\-(?=\\d))|\\d{1,3})+";
 		Pattern pattern = Pattern.compile(regChapterVerse);
 		List<VerseText> verses = new ArrayList<VerseText>();
 		List<Book> books = null;

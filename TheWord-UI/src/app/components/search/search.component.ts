@@ -35,8 +35,8 @@ export class SearchComponent implements OnInit {
     this.search = 'true';
     var doSearch = true; 
     this.passages = [];   
-    let regExpression = new RegExp('\\d{2}\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?');
-    let regChapterVerse = new RegExp('\\s+\\d{1,3}:\\d{1,3}(-\\d{1,3})?');
+    let regExpression = new RegExp('\\d{2}\\s+\\d{1,3}:((\\d{1,3}\\,(?=\\d{1,3}))|(\\d{1,3}\\-(?=\\d))|\\d{1,3})+');
+    let regChapterVerse = new RegExp('\\s+\\d{1,3}:((\\d{1,3}\\,(?=\\d{1,3}))|(\\d{1,3}\\-(?=\\d))|\\d{1,3})+');
     //check whether to do search
     if(val){
       val.split(";").forEach(element => {
