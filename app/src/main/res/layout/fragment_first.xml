@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/booktab1"
-    android:background="#f6f1f1">
+    android:background="?attr/textAppearanceHeadline3">
     <ListView
         android:id="@+id/book_listView"
         android:layout_width="match_parent"

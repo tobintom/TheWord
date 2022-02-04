@@ -23,6 +23,7 @@ import com.theword.thedigitalword.adapter.SearchAdapter;
 import com.theword.thedigitalword.model.SearchModel;
 import com.theword.thedigitalword.service.TheWordContentService;
 import com.theword.thedigitalword.util.SharedPreferencesUtil;
+import com.theword.thedigitalword.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,11 +38,19 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView srchView = null;
     private ArrayList srchList = null;
     Context context = null;
+    boolean hasSearchResults = false;
+    boolean hasPassageResults = false;
+    String dir = "";
+    String id = "";
+
+    TextView hint = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences(getString(R.string.app_id), Context.MODE_PRIVATE);
+        Util.onActivityCreateSetTheme(this,SharedPreferencesUtil.getTheme(sharedPreferences,this));
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_search);
         context = this.getApplicationContext();
         srchView = findViewById(R.id.idsrchres);
@@ -57,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
         hintText.setVisibility(View.VISIBLE);
         hintText.setText("Search for scripture passages using the book name, chapter and verse. E.g. John 3:16 " +
                 "\n" +
-                "Verses can also be a range, e.g. John 3:16-20. Multiple passages should be separated by semicolon(;). E.g. John 3:16;Genesis 1:1-5;2 Peter 1:5" +
+                "Verses can also be a range, e.g. John 3:16-20. Multiple passages should be separated by semicolon(;). E.g. John 3:16;Genesis 1:1-5,6;2 Peter 1:5,9" +
                 "\n" +
                 "The book name can be in English or in the language selected in the Read Tab. E.g. If the Read Tab is Spanish, searching for John 3:16 and Juan 3:16 retrieves the same passage.\n" +
                 "\n" +
@@ -76,118 +85,126 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 srchList = new ArrayList();
-                boolean hasSearchResults = false;
-                boolean hasPassageResults = false;
-                String dir = "";
-                String id = "";
                 if(query!=null && query.trim().length()>0) {
-                    TextView hint = (TextView)findViewById(R.id.searchHint);
-                    try {
-                        String searchData = TheWordContentService.getSearch(sharedPreferences, context, query);
-                        //check if SearchData exists
-                        if(searchData!=null && searchData.trim().length()>0) {
-                            String bookName = "";
-                            String englishName="";
-                            String bookNumber="";
-                            String chapter="";
-                            String chapterText="";
-                            hint.setText("Click on the list icon to read the full chapter.");
-                            JSONObject searchObject = new JSONObject(searchData);
-                            String searchResult = searchObject.getString("status");
-                            if(searchResult!=null && searchResult.trim().equalsIgnoreCase("SUCCESS")){
-                                hasSearchResults = true;
-                                //Parse Search Results
-                                dir = searchObject.getString("dir");
-                                id = searchObject.getString("id");
-                                JSONArray oArray =  searchObject.getJSONArray("passages");
-                                for(int i=0;i<oArray.length();i++){
-                                    JSONObject ol = (JSONObject) oArray.get(i);
-                                    bookName = ol.getString("name");
-                                    bookNumber = ol.getString("book");
-                                    englishName = ol.getString("english");
-                                    //Get all the Chapters
-                                    JSONArray chapters = ol.getJSONArray("content");
-                                    for(int c=0;c<chapters.length();c++) {
-                                    JSONObject content = (JSONObject)chapters.get(c);
-                                    chapter = content.getString("chapter");
-                                    chapterText = "";
-                                    JSONArray verses = content.getJSONArray("verses");
-                                    for(int v=0;v<verses.length();v++){
-                                        JSONObject verse = (JSONObject)verses.get(v);
-                                        chapterText = chapterText + verse.getString("verse") +".  " +verse.getString("text") + System.getProperty("line.separator");
-                                    }
-                                    //Build Adapter
-                                        srchList.add(new SearchModel(query,bookName,bookNumber,englishName,chapter,chapterText,dir,id));
+                    hint = (TextView)findViewById(R.id.searchHint);
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                String searchData = TheWordContentService.getSearch(sharedPreferences, context, query);
+                                //check if SearchData exists
+                                if(searchData!=null && searchData.trim().length()>0) {
+                                    String bookName = "";
+                                    String englishName="";
+                                    String bookNumber="";
+                                    String chapter="";
+                                    String chapterText="";
+                                    JSONObject searchObject = new JSONObject(searchData);
+                                    String searchResult = searchObject.getString("status");
+                                    if(searchResult!=null && searchResult.trim().equalsIgnoreCase("SUCCESS")){
+                                        hasSearchResults = true;
+                                        //Parse Search Results
+                                        dir = searchObject.getString("dir");
+                                        id = searchObject.getString("id");
+                                        JSONArray oArray =  searchObject.getJSONArray("passages");
+                                        for(int i=0;i<oArray.length();i++){
+                                            JSONObject ol = (JSONObject) oArray.get(i);
+                                            bookName = ol.getString("name");
+                                            bookNumber = ol.getString("book");
+                                            englishName = ol.getString("english");
+                                            //Get all the Chapters
+                                            JSONArray chapters = ol.getJSONArray("content");
+                                            for(int c=0;c<chapters.length();c++) {
+                                                JSONObject content = (JSONObject)chapters.get(c);
+                                                chapter = content.getString("chapter");
+                                                chapterText = "";
+                                                JSONArray verses = content.getJSONArray("verses");
+                                                for(int v=0;v<verses.length();v++){
+                                                    JSONObject verse = (JSONObject)verses.get(v);
+                                                    chapterText = chapterText + verse.getString("verse") +".  " +verse.getString("text") + System.getProperty("line.separator");
+                                                }
+                                                //Build Adapter
+                                                srchList.add(new SearchModel(query,bookName,bookNumber,englishName,chapter,chapterText,dir,id));
+                                            }
+                                        }
+                                    }else{
+                                        hasSearchResults = false;
                                     }
                                 }
-                            }else{
-                                hasSearchResults = false;
-                            }
-                        }
-                        if(!hasSearchResults) {
-                            //Look for passage results only if there are no search results
-                            String passageData = TheWordContentService.getPassages(sharedPreferences, context, query);
-                            if(passageData!=null && passageData.trim().length()>0){
-                                String bookName = "";
-                                String englishName="";
-                                String bookNumber="";
-                                String chapter="";
-                                String chapterText="";
-                                hint.setText("Click on the list icon to read the full chapter.");
-                                JSONObject passageObject = new JSONObject(passageData);
-                                String passageResult = passageObject.getString("status");
-                                if(passageResult!=null && passageResult.trim().equalsIgnoreCase("SUCCESS")){
-                                    hasPassageResults = true;
-                                    //Parse Search Results
-                                    dir = passageObject.getString("dir");
-                                    id = passageObject.getString("id");
-                                    JSONArray oArray =  passageObject.getJSONArray("passages");
-                                    for(int i=0;i<oArray.length();i++) {
-                                        JSONObject ol = (JSONObject) oArray.get(i);
-                                        bookName = ol.getString("name");
-                                        bookNumber = ol.getString("book");
-                                        englishName = ol.getString("english");
-                                        //Get all the Chapters
-                                        JSONArray chapters = ol.getJSONArray("content");
-                                        for (int c = 0; c < chapters.length(); c++) {
-                                            JSONObject content = (JSONObject) chapters.get(c);
-                                            chapter = content.getString("chapter");
-                                            chapterText = "";
-                                            JSONArray verses = content.getJSONArray("verses");
-                                            for (int v = 0; v < verses.length(); v++) {
-                                                JSONObject verse = (JSONObject) verses.get(v);
-                                                chapterText = chapterText + verse.getString("verse") + ".  " + verse.getString("text") + System.getProperty("line.separator");
+                                if(!hasSearchResults) {
+                                    //Look for passage results only if there are no search results
+                                    String passageData = TheWordContentService.getPassages(sharedPreferences, context, query);
+                                    if(passageData!=null && passageData.trim().length()>0){
+                                        String bookName = "";
+                                        String englishName="";
+                                        String bookNumber="";
+                                        String chapter="";
+                                        String chapterText="";
+                                        JSONObject passageObject = new JSONObject(passageData);
+                                        String passageResult = passageObject.getString("status");
+                                        if(passageResult!=null && passageResult.trim().equalsIgnoreCase("SUCCESS")){
+                                            hasPassageResults = true;
+                                            //Parse Search Results
+                                            dir = passageObject.getString("dir");
+                                            id = passageObject.getString("id");
+                                            JSONArray oArray =  passageObject.getJSONArray("passages");
+                                            for(int i=0;i<oArray.length();i++) {
+                                                JSONObject ol = (JSONObject) oArray.get(i);
+                                                bookName = ol.getString("name");
+                                                bookNumber = ol.getString("book");
+                                                englishName = ol.getString("english");
+                                                //Get all the Chapters
+                                                JSONArray chapters = ol.getJSONArray("content");
+                                                for (int c = 0; c < chapters.length(); c++) {
+                                                    JSONObject content = (JSONObject) chapters.get(c);
+                                                    chapter = content.getString("chapter");
+                                                    chapterText = "";
+                                                    JSONArray verses = content.getJSONArray("verses");
+                                                    for (int v = 0; v < verses.length(); v++) {
+                                                        JSONObject verse = (JSONObject) verses.get(v);
+                                                        chapterText = chapterText + verse.getString("verse") + ".  " + verse.getString("text") + System.getProperty("line.separator");
+                                                    }
+                                                    //Build Adapter
+                                                    srchList.add(new SearchModel(query,bookName, bookNumber, englishName, chapter, chapterText, dir, id));
+                                                }
                                             }
-                                            //Build Adapter
-                                            srchList.add(new SearchModel(query,bookName, bookNumber, englishName, chapter, chapterText, dir, id));
+                                        }else{
+                                            hasPassageResults = false;
                                         }
                                     }
-                                }else{
-                                    hasPassageResults = false;
                                 }
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
-                        }
-                        //If there are no results
-                        if(!hasPassageResults && !hasSearchResults){
+                            //Update UI
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(hasPassageResults || hasSearchResults){
+                                        hint.setText("Click on the list icon to read the full chapter.");
+                                    }
+                                    //If there are no results
+                                    if(!hasPassageResults && !hasSearchResults){
 //                            TextView results = (TextView)findViewById(R.id.searchShow);
 //                            results.setVisibility(View.VISIBLE);
-                            hint.setText("No search results found..");
-                            hint.setTextColor(Color.BLACK);
-                            hint.setTextSize(17);
-                            hint.setTypeface(Typeface.DEFAULT_BOLD);
-                        }
-                        //Set Adapter
-                        SearchAdapter srchAdapter = new SearchAdapter(SearchActivity.this, srchList);
-                        // below line is for setting a layout manager for our recycler view.
-                        // here we are creating vertical list so we will provide orientation as vertical
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                        // in below two lines we are setting layoutmanager and adapter to our recycler view.
-                        srchView.setLayoutManager(linearLayoutManager);
-                        srchView.setAdapter(srchAdapter);
-                    }catch (Exception e){
-                        //Handle Exception
-                    }
+                                        hint.setText("No search results found..");
+                                       // hint.setTextColor(Color.BLACK);
+                                        hint.setTextSize(17);
+                                        hint.setTypeface(Typeface.DEFAULT_BOLD);
+                                    }
+                                    //Set Adapter
+                                    SearchAdapter srchAdapter = new SearchAdapter(SearchActivity.this, srchList);
+                                    // below line is for setting a layout manager for our recycler view.
+                                    // here we are creating vertical list so we will provide orientation as vertical
+                                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                                    // in below two lines we are setting layoutmanager and adapter to our recycler view.
+                                    srchView.setLayoutManager(linearLayoutManager);
+                                    srchView.setAdapter(srchAdapter);
 
+                                }
+                            });
+                        }
+                    }.start();
                 }
                 return false;
             }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/editbookref"
+    android:orientation="vertical"
+    android:background="?attr/cardBackgroundColor"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/ebview"
+        android:text="Edit Bookmark"
+        android:gravity="center_horizontal"
+        android:drawableEnd="@drawable/ic_baseline_close_24"
+        android:drawableTint="?attr/titleTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="?attr/textAppearanceHeadline4"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:id="@+id/ebversetext"
+        android:text="John 3:1,2-3,5"
+        android:layout_below="@id/ebview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="?attr/textAppearanceHeadline1"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        />
+    <EditText
+        android:id="@+id/ebTitle_E"
+        android:layout_width="match_parent"
+        android:textSize="16dp"
+        android:textColor="?attr/titleTextColor"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:inputType="textCapSentences" />
+    <EditText
+        android:id="@+id/ebLink_E"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_baseline_add_link_24"
+        android:drawableTint="?attr/titleTextColor"
+        android:textColor="?attr/titleTextColor"
+        android:drawablePadding="10dp"
+        android:textSize="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:inputType="textCapSentences" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="14dp"
+        android:textColor="?attr/textAppearanceHeadline1"
+        android:text="You can use the Link to tag this Bookmark with other Bookmarks tagged with the same Link."/>
+    <LinearLayout
+        android:id="@+id/ebbutton_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/ebook_save"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Save" />
+        <Button
+            android:id="@+id/ebook_cancel"
+            android:textColor="@color/black"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
+
+</LinearLayout>

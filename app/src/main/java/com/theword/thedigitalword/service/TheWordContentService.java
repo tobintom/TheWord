@@ -30,6 +30,7 @@ public class TheWordContentService {
         return response.body().string();
     }
 
+
     public static String getDailyVerse(SharedPreferences sp, Context c)throws Exception{
         OkHttpClient client = Service.getServiceClient().newBuilder()
                 .authenticator(new Authenticator(sp,c))

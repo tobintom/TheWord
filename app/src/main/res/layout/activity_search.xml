@@ -19,7 +19,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fafafa"
+        android:background="?attr/actionBarStyle"
         app:layout_anchor="@+id/appBarLayoutS"
         app:layout_anchorGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/scrollViewSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/colorOnPrimary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="@+id/appBarLayoutS"
         app:layout_constraintStart_toStartOf="@+id/appBarLayoutS"
@@ -58,7 +58,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="10dp"
-            android:textColor="#616161"
+            android:textColor="?attr/textAppearanceHeadline4"
             android:textSize="16sp"
             />
         <TextView
@@ -70,7 +70,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"
+            android:textColor="?attr/titleTextColor"
             android:textStyle="bold"
             android:textSize="17sp"
             android:visibility="invisible"

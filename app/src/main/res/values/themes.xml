@@ -2,12 +2,340 @@
     <!-- Base application theme. -->
     <style name="Theme.TheDigitalWord" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/THEME_STATUS</item>
+        <item name="actionBarStyle">@color/THEME</item>
+        <item name="colorPrimaryVariant">@color/THEME_STATUS</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/THEME</item>
+        <item name="colorSecondaryVariant">@color/THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.RED" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/RED_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/RED_THEME</item>
+        <item name="colorPrimaryVariant">@color/RED_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/RED_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/RED_THEME</item>
+        <item name="colorSecondaryVariant">@color/RED_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- -->
+    <style name="Theme.TheDigitalWord.PINK" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/PINK_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/PINK_THEME</item>
+        <item name="colorPrimaryVariant">@color/PINK_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/PINK_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/PINK_THEME</item>
+        <item name="colorSecondaryVariant">@color/PINK_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.PURPLE" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/PURPLE_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/PURPLE_THEME</item>
+        <item name="colorPrimaryVariant">@color/PURPLE_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/PURPLE_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/PURPLE_THEME</item>
+        <item name="colorSecondaryVariant">@color/PURPLE_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.BLUE" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/BLUE_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/BLUE_THEME</item>
+        <item name="colorPrimaryVariant">@color/BLUE_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/BLUE_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/BLUE_THEME</item>
+        <item name="colorSecondaryVariant">@color/BLUE_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.TEAL" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/TEAL_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/TEAL_THEME</item>
+        <item name="colorPrimaryVariant">@color/TEAL_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/TEAL_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/TEAL_THEME</item>
+        <item name="colorSecondaryVariant">@color/TEAL_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.GREEN" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/GREEN_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/GREEN_THEME</item>
+        <item name="colorPrimaryVariant">@color/GREEN_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/GREEN_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/GREEN_THEME</item>
+        <item name="colorSecondaryVariant">@color/GREEN_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.YELLOW" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/YELLOW_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/YELLOW_THEME</item>
+        <item name="colorPrimaryVariant">@color/YELLOW_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/YELLOW_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/YELLOW_THEME</item>
+        <item name="colorSecondaryVariant">@color/YELLOW_THEME</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TheDigitalWord.ORANGE" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/ORANGE_THEME_STATUS</item>
+        <item name="actionBarStyle">@color/ORANGE_THEME</item>
+        <item name="colorPrimaryVariant">@color/ORANGE_THEME_STATUS</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/ORANGE_THEME_VS</item>
+
+        <item name="titleTextColor">@color/DAY_TEXT_COLOR</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="textAppearanceBody1">@color/TAB_TEXT</item>
+        <item name="actionMenuTextColor">@color/URL_TEXT</item>
+        <item name="textAppearanceBody2">@color/TAB_TEXT</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/actionBarStyle</item>
+        <item name="tabIconTint">?attr/colorPrimary</item>
+        <item name="textAppearanceSubtitle1">@color/BOTTOM_NORMAL</item>
+        <item name="textAppearanceSubtitle2">@color/BOTTOM_CHECKED</item>
+        <item name="textAppearanceHeadline1">@color/text</item>
+        <item name="textAppearanceHeadline2">@color/URL_TEXT</item>
+        <item name="textAppearanceHeadline3">@color/HOME_BACKGROUND</item>
+        <item name="textAppearanceHeadline4">@color/SEARCH_COLOR</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@color/FACEBOOK</item>
+        <item name="buttonBarPositiveButtonStyle">@color/TWITTER</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/ORANGE_THEME</item>
+        <item name="colorSecondaryVariant">@color/ORANGE_THEME</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -33,4 +361,22 @@
     <style name="Theme.TheDigitalWord.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TheDigitalWord.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="LinkDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:textSize">17sp</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="my_time_picker_style">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="ThemeOverlay.TheDigitalWord.AppWidgetContainer" parent="">
+        <item name="appWidgetBackgroundColor">@color/light_blue_600</item>
+        <item name="appWidgetTextColor">@color/light_blue_50</item>
+    </style>
 </resources>

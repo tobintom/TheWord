@@ -3,9 +3,11 @@ package com.theword.thedigitalword.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.theword.thedigitalword.HomeActivity;
 import com.theword.thedigitalword.R;
+import com.theword.thedigitalword.SearchActivity;
 import com.theword.thedigitalword.model.SearchModel;
 import com.theword.thedigitalword.util.SharedPreferencesUtil;
 
@@ -26,6 +29,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Viewholder
     private Context context;
     private ArrayList<SearchModel> searchList;
     SharedPreferences sharedPreferences = null;
+    boolean dark = false;
 
     public SearchAdapter(Context context, ArrayList<SearchModel> searchList) {
         this.context = context;
@@ -44,6 +48,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Viewholder
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         SearchModel model = searchList.get(position);
+        dark = (SharedPreferencesUtil.getDarkMode(sharedPreferences, context)!=null
+                && SharedPreferencesUtil.getDarkMode(sharedPreferences,context).trim()
+                .equalsIgnoreCase("TRUE"))?true:false;
         //Set the view
         String chapter = model.getBookName()+" " +model.getChapter();
         String engChapter = model.getEnglishName()+" "+model.getChapter();
@@ -103,6 +110,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Viewholder
             else {
                 // set color here
                 wordToSpan.setSpan(new BackgroundColorSpan(0xFFFFFF00), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                if(dark) {
+                    wordToSpan.setSpan(new ForegroundColorSpan(Color.BLACK), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
                 tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
             }
         }

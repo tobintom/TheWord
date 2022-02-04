@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="?attr/cardBackgroundColor"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/noteTitle"
+            android:text="Note Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="?attr/titleTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/noteEdit"
+            android:src="@drawable/ic_baseline_mode_edit_24"
+            android:tint="?attr/textAppearanceHeadline4"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/noteDelete"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10dp"
+            />
+        <ImageView
+            android:id="@+id/noteDelete"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:tint="?attr/textAppearanceHeadline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:paddingRight="1dp"
+            />
+        <TextView
+            android:id="@+id/noteContent"
+            android:text="Note Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noteTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="?attr/titleTextColor"
+            android:textSize="17sp"
+            />
+        <TextView
+            android:id="@+id/noteTime"
+            android:text="September 12, 2021 12:21 AM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noteContent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="?attr/textAppearanceHeadline4"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

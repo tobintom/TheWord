@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="?attr/cardBackgroundColor"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/nbooktitle"
+            android:text="A new bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="37dp"
+            android:textColor="?attr/titleTextColor"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+        <ImageView
+            android:id="@+id/nbookEdit"
+            android:src="@drawable/ic_baseline_mode_edit_24"
+            android:tint="?attr/textAppearanceHeadline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+           android:layout_toLeftOf="@id/nbookDelete"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+
+            />
+        <ImageView
+            android:id="@+id/nbookDelete"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:tint="?attr/textAppearanceHeadline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:paddingRight="1dp"
+            />
+        <TextView
+            android:id="@+id/nbooklink"
+            android:text="link name"
+            android:drawableStart="@drawable/ic_baseline_link_24"
+            android:drawableTint="?attr/textAppearanceHeadline4"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/nbooktitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="10dp"
+            android:textColor="?attr/textAppearanceHeadline4"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/nbookEng"
+            android:text="John 4:8,12-14"
+            android:layout_below="@id/nbooklink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="20dp"
+            android:textColor="?attr/textAppearanceHeadline1"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/nbookVerses"
+            android:text="John 4:8,12-14"
+            android:drawableStart="@drawable/ic_baseline_list_24"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/nbookEng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="20dp"
+            android:textColor="?attr/titleTextColor"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/nbookNote"
+            android:text="This is a note for the selected verses."
+            android:layout_below="@id/nbookVerses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="10dp"
+            android:textColor="?attr/titleTextColor"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/nbookTime"
+            android:text="September 12, 2021 12:21 AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nbookNote"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="?attr/textAppearanceHeadline4"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/nbookverse"
+            android:text="Read Verse"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nbookNote"
+            android:layout_toRightOf="@id/nbookTime"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="?attr/textAppearanceHeadline1"
+            android:textSize="16sp"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

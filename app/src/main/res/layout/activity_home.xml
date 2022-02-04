@@ -22,7 +22,7 @@
                 android:id="@+id/home_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fafafa"
+                android:background="?attr/actionBarStyle"
                 app:layout_anchor="@+id/appBarLayout"
                 app:layout_anchorGravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:gravity="center_vertical"
                 android:minHeight="40dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/titleTextColor"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/toollang"
@@ -58,7 +58,7 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:gravity="center_vertical"
                 android:minHeight="40dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/titleTextColor"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/home_toolbar"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="35dp"
-        android:background="#f6f1f1"
+        android:background="?attr/textAppearanceHeadline3"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="@+id/appBarLayout"
         app:layout_constraintStart_toStartOf="@+id/appBarLayout"
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="?attr/backgroundColor"
                 app:cardPreventCornerOverlap="false"
                 app:cardElevation="0dp"
                 app:cardCornerRadius="0dp">
@@ -123,7 +123,7 @@
                         android:layout_toEndOf="@id/bookicon"
                         android:fontFamily="sans-serif"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/titleTextColor"
                         android:textSize="20sp"
                         android:text=""
                         android:textStyle="bold" />
@@ -138,7 +138,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/bookicon"
                         android:drawablePadding="2dp"
-                        android:textColor="@color/text"
+                        android:textColor="?attr/textAppearanceHeadline1"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         />
@@ -146,6 +146,7 @@
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/home_verse_text"
+                android:background="?attr/backgroundColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cv"
@@ -153,7 +154,8 @@
                 android:gravity="fill_vertical"
                 android:lineSpacingExtra="5dp"
                 android:padding="10dp"
-                android:textColor="#5d4037"
+                android:text=""
+                android:textColor="?attr/textAppearanceHeadline1"
                 android:textSize="20sp" />
 
             <TextView
@@ -168,7 +170,7 @@
                 android:padding="2dp"
                 android:paddingBottom="2dp"
                 android:text=""
-                android:textColor="#5d4037"
+                android:textColor="?attr/textAppearanceHeadline1"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -185,8 +187,8 @@
                 android:padding="10dp"
                 android:paddingBottom="30dp"
                 android:text="https://thedigitalword.org"
-                android:textColor="#5d4037"
-                android:textColorLink="#751a13"
+                android:textColor="?attr/textAppearanceHeadline1"
+                android:textColorLink="?attr/textAppearanceHeadline2"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -196,7 +198,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:textAlignment="center"
-        android:textColor="@color/text"
+        android:textColor="?attr/textAppearanceHeadline1"
         android:textSize="16dp"
         android:layout_gravity="bottom|center_horizontal"
         android:background="@drawable/bottom_rect"
@@ -205,8 +207,11 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLeft"
         app:fabSize="mini"
-        app:backgroundTint="#A9A9A9"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="?attr/cardBackgroundColor"
+        app:backgroundTint="?attr/cardBackgroundColor"
+        android:tint="?attr/boxStrokeColor"
+        app:tint="?attr/boxStrokeColor"
+        app:elevation="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
@@ -220,8 +225,11 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabRight"
         app:fabSize="mini"
-        android:backgroundTint="@color/white"
-        app:backgroundTint="#A9A9A9"
+        android:backgroundTint="?attr/cardBackgroundColor"
+        app:backgroundTint="?attr/cardBackgroundColor"
+        android:tint="?attr/boxStrokeColor"
+        app:tint="?attr/boxStrokeColor"
+        app:elevation="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -241,5 +249,115 @@
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
-
+    <include layout="@layout/bottom_sheet"  />
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88141414"
+        android:id="@+id/top_layout"
+         >
+        <LinearLayout
+            android:id="@+id/hintOne"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:tint="@color/white"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/hint_up" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="bottom"
+                android:text="You can change the Bible Book and Language using the menu on top"
+                android:textColor="@android:color/white"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textSize="23sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/hintTwo"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="100dp"
+                android:layout_gravity="bottom"
+                android:text="Press and hold on a verse for Cross References"
+                android:textColor="@android:color/white"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textSize="23sp" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:tint="@color/white"
+                android:layout_marginLeft="100dp"
+                android:src="@drawable/hint_down" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/hintThree"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="bottom"
+                android:text="Click on one or more verses for options to Copy, Share, Highlight, Set Favorite, Add Bookmarks and Notes"
+                android:textColor="@android:color/white"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textSize="23sp" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:tint="@color/white"
+                android:layout_marginLeft="100dp"
+                android:src="@drawable/hint_down" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="160dp"
+            android:layout_marginRight="60dp"
+            android:text="Next"
+            android:textStyle="bold"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/white"
+            android:drawableRight="@drawable/right"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

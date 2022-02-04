@@ -2,7 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/todaylayout"
+    android:id="@+id/morelayout"
+    android:background="?attr/backgroundColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,10 +16,160 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cfcfcf"
+        android:background="?attr/actionBarStyle"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
         app:title="The Digital Word"
         />
 </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/bible"
+                android:alpha="0.50"/>
+            <androidx.cardview.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="40dp"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/aboutm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:drawableStart="@drawable/ic_baseline_info_24"
+                android:drawablePadding="15dp"
+                android:text="About"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/helpm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:drawableStart="@drawable/ic_baseline_help_24"
+                android:drawablePadding="15dp"
+                android:text="Help"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/ratem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:drawableStart="@drawable/ic_baseline_thumb_up_24"
+                android:drawablePadding="15dp"
+                android:text="Rate the App"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/sharem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:drawableStart="@drawable/ic_baseline_share_24"
+                android:drawablePadding="15dp"
+                android:text="Share the App"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/emailm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:drawableStart="@drawable/ic_baseline_mode_edit_24"
+                android:drawablePadding="15dp"
+                android:text="Feedback"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/twitterm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:drawableStart="@drawable/ic_baseline_twitter_24"
+                android:drawablePadding="15dp"
+                android:text="Follow us on Twitter"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/facebookm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="18dp"
+                android:paddingBottom="20dp"
+                android:drawableStart="@drawable/ic_baseline_facebook_24"
+                android:drawablePadding="15dp"
+                android:text="Like us on Facebook"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="20dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/more_footer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_verse_text"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif"
+                android:gravity="fill_vertical"
+                android:lineSpacingExtra="2dp"
+                android:padding="2dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="2dp"
+                android:text="c"
+                android:textColor="?attr/textAppearanceHeadline1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/more_footer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:autoLink="web"
+                android:fontFamily="sans-serif"
+                android:gravity="fill_vertical"
+                android:lineSpacingExtra="10dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="30dp"
+                android:text="https://thedigitalword.org"
+                android:textColor="?attr/textAppearanceHeadline1"
+                android:textColorLink="?attr/textAppearanceHeadline2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <include
         layout="@layout/bottom_navigation"

@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/booktab2"
-    android:background="#f6f1f1">
+    android:background="?attr/textAppearanceHeadline3">
     <TextView
         android:id="@+id/chapterbook"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?attr/titleTextColor"
         android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

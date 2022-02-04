@@ -1,12 +1,19 @@
 package com.theword.thedigitalword.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 
+import androidx.core.graphics.drawable.DrawableCompat;
+
+import com.theword.thedigitalword.ExceptionActivity;
 import com.theword.thedigitalword.R;
 
 import java.util.Random;
@@ -125,65 +132,6 @@ public class Util {
         return resourceId;
     }
 
-    public static  int getRandomResource() {
-        Random rand = new Random();
-        int random =  rand.nextInt((16 - 1) + 1) + 1;
-        int returnResource = R.drawable.a;
-        switch (random){
-            case 1:
-                returnResource = R.drawable.a;
-                break;
-            case 2:
-                returnResource = R.drawable.b;
-                break;
-            case 3:
-                returnResource = R.drawable.c;
-                break;
-            case 4:
-                returnResource = R.drawable.d;
-                break;
-            case 5:
-                returnResource = R.drawable.e;
-                break;
-            case 6:
-                returnResource = R.drawable.f;
-                break;
-            case 7:
-                returnResource = R.drawable.g;
-                break;
-            case 8:
-                returnResource = R.drawable.h;
-                break;
-            case 9:
-                returnResource = R.drawable.i;
-                break;
-            case 10:
-                returnResource = R.drawable.j;
-                break;
-            case 11:
-                returnResource = R.drawable.k;
-                break;
-            case 12:
-                returnResource = R.drawable.l;
-                break;
-            case 13:
-                returnResource = R.drawable.m;
-                break;
-            case 14:
-                returnResource = R.drawable.n;
-                break;
-            case 15:
-                returnResource = R.drawable.o;
-                break;
-            case 16:
-                returnResource = R.drawable.p;
-                break;
-            default:
-                returnResource = R.drawable.a;
-                break;
-        }
-        return returnResource;
-    }
     public static  int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -221,5 +169,89 @@ public class Util {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static Drawable tintMyDrawable(Drawable drawable, int color) {
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, color);
+        DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
+        return drawable;
+    }
+
+    public static String trimToEmpty(String text){
+        String RETURN = "";
+        if(text!=null && text.length()>0){
+            RETURN = text.trim();
+        }
+        return RETURN;
+    }
+
+    public static String ConvertToRanges(String verses){
+        String result="";
+        if(verses!=null && verses.length()>0 && verses.contains(",")) {
+            String[] arr1 = verses.split(",");
+            int[] arr = new int[arr1.length];
+
+            for (int x = 0; x < arr1.length; x++) // Convert string array to integer array
+            {
+                arr[x] = Integer.parseInt(arr1[x]);
+            }
+
+            int start, end;  // track start and end
+            end = start = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                // as long as entries are consecutive, move end forward
+                if (arr[i] == (arr[i - 1] + 1)) {
+                    end = arr[i];
+                } else {
+                    // when no longer consecutive, add group to result
+                    // depending on whether start=end (single item) or not
+                    if (start == end)
+                        result += start + ",";
+                    else
+                        result += start + "-" + end + ",";
+                    start = end = arr[i];
+                }
+            }
+            // handle the final group
+            if (start == end)
+                result += start;
+            else {
+                result += start + "-" + end;
+            }
+        }else{
+            result = verses;
+        }
+
+        return result;
+    }
+
+    public static void onFatalException(Context context){
+        Intent i = new Intent(context, ExceptionActivity.class);
+
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(i);
+    }
+
+    public static boolean checkConnection(Context context){
+        boolean hasConnection = true;
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo datac = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if ((wifi != null & datac != null)
+                && (wifi.isConnected() | datac.isConnected())) {
+            hasConnection = true;
+        }else{
+            hasConnection = false;
+        }
+       return hasConnection;
+    }
+
+    public static void onActivityCreateSetTheme(Activity activity, int theme){
+        activity.setTheme(theme);
     }
 }

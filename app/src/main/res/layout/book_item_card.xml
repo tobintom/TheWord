@@ -34,14 +34,14 @@
                 android:id="@+id/cardbookname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?attr/titleTextColor"
                 android:textSize="19sp"
                 android:text=""/>
             <TextView
                 android:id="@+id/cardbookenglish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#5d4037"
+                android:textColor="?attr/textAppearanceHeadline1"
                 android:textSize="16sp"
                 android:text=""
                 />

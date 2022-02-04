@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.theword.thedigitalword">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:name=".WordApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/bible"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/bible"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TheDigitalWord.NoActionBar">
+        <activity android:name=".NotesActivity"></activity>
+        <activity android:name=".ExceptionActivity"></activity>
+        <activity android:name=".BookmarkActivity" />
+        <activity android:name=".HomeBookmarkActivity" />
+        <activity android:name=".HomeNotesActivity" />
+        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".HightlightActivity" />
+        <activity android:name=".AddEditNote" />
+        <activity
+            android:name=".PersonalNoteActivity"
+            android:label="@string/title_activity_personal_note"
+            android:theme="@style/Theme.TheDigitalWord.NoActionBar.NoActionBar" />
+
+        <receiver android:name=".DigitalWordSmall">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/digital_word_small_info" />
+        </receiver>
+
+        <!--<service
+            android:name=".DigitalWordWidgetSmallService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".DigitalWordWidgetService"
+            android:enabled="true"
+            android:exported="true" />
+            -->
+
+        <receiver android:name=".DigitalWordLarge">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/digital_word_large_info" />
+        </receiver>
+
+        <activity
+            android:name=".OnboardActivity"
+            android:label="@string/title_activity_onboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TheDigitalWord.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".BookSelector"
+            android:label="@string/title_activity_book_selector"
+            android:theme="@style/Theme.TheDigitalWord.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".LanguageSelectorActivity"
+            android:label="@string/title_activity_language_selector"
+            android:theme="@style/Theme.TheDigitalWord.NoActionBar.NoActionBar" /> <!-- Splash Screen -->
+        <activity
+            android:name=".SplashScreen"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".TodayActivity" />
+        <activity android:name=".MeActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".HelpActivity" /> <!-- Register the Alarm Receiver -->
+        <receiver
+            android:name=".notification.AlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".notification.ReminderReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".notification.WidgetReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

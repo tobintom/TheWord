@@ -45,7 +45,22 @@ public class TodayActivity extends AppCompatActivity {
     ImageView imageView = null;
     ImageView outsideView = null;
     TextView dateView = null;
+    TextView bn = null;
     TextView greetingView = null;
+    TextView bv = null;
+    TextView bni = null;
+    TextView bvi = null;
+    ImageView shareText = null;
+    TextView textRead = null;
+    TextView imageRead = null;
+    ImageView imageText = null;
+    BitmapDrawable bitmapDrawable = null;
+    Bitmap bitmap = null;
+
+    String texti = "";
+    String booki = "";
+    String diri = "ltr";
+
     String dirH = "";
     String textBook = "";
     String textChapter = "";
@@ -57,6 +72,10 @@ public class TodayActivity extends AppCompatActivity {
     String imageHeading = "";
     String imageString = "";
 
+    String text = "";
+    String book = "";
+    String dir = "ltr";
+
     //For Social Media Tabs
     private SocialMediaAdapter adapter;
     private TabLayout tabLayout;
@@ -67,129 +86,191 @@ public class TodayActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences(getString(R.string.app_id), Context.MODE_PRIVATE);
+        Util.onActivityCreateSetTheme(this,SharedPreferencesUtil.getTheme(sharedPreferences,this));
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today);
 
         navigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
         outsideView = (ImageView)findViewById(R.id.outside_image);
         imageView = (ImageView)findViewById(R.id.todayimage);
+        bn = (TextView)findViewById(R.id.vodtb);
+        bv = (TextView)findViewById(R.id.vodt);
+        bni = (TextView)findViewById(R.id.vodtbi);
+        bvi = (TextView)findViewById(R.id.vodti);
+        shareText = (ImageView)findViewById(R.id.vodshare);
+        textRead = (TextView) findViewById(R.id.vodtc);
+        imageRead = (TextView) findViewById(R.id.vodtci);
+        imageText = (ImageView)findViewById(R.id.vodsharei);
 
         dateView = (TextView)findViewById(R.id.todaydate);
         greetingView = (TextView)findViewById(R.id.todayGreeting);
-        // Get VOD
-        JSONObject jObject = null;
-        String text = "";
-        String book = "";
-        String dir = "ltr";
-        try {
-            String jsonData = TheWordContentService.getDailyVerse(sharedPreferences, this.getApplicationContext());
-            if(jsonData!=null && jsonData.trim().length()>0) {
-                jObject = new JSONObject(jsonData);
-                dir = jObject.getString("dir");
-                this.dirH = dir;
-                JSONObject o = (JSONObject) jObject.getJSONArray("passages").get(0);
-                book = o.getString("name");
-                textBook = o.getString("book");
-                //get rest
-                JSONObject p = (JSONObject)o.getJSONArray("content").get(0);
-                textChapter = p.getString("chapter");
-                book = book +" "+ p.getString("chapter");
-                JSONArray textArray = (JSONArray) p.getJSONArray("verses");
-                for(int i=0;i<textArray.length();i++){
-                    JSONObject ol = (JSONObject) textArray.get(i);
-                    text = text + ol.getString("verse") +".  " +ol.getString("text") + System.getProperty("line.separator");
+        Context context = this.getApplicationContext();
+
+        //Set the Date Greeting and Image
+        Formatter fmt = new Formatter();
+        Calendar cal = Calendar.getInstance();
+        fmt.format("%tA, %tB %td", cal, cal, cal);
+        dateView.setText(fmt.toString());
+        int timeOfDay = cal.get(Calendar.HOUR_OF_DAY);
+        String greeting = "";
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            greeting =  "Good Morning";
+            outsideView.setBackgroundColor(Color.rgb(229, 220, 210));
+        }else if(timeOfDay >= 12 && timeOfDay < 17){
+            greeting = "Good Afternoon";
+            outsideView.setBackgroundColor(Color.rgb(255, 240, 189));
+        }else if(timeOfDay >= 17 && timeOfDay < 20){
+            greeting = "Good Evening";
+            outsideView.setBackgroundColor(Color.rgb(229, 164, 198));
+        }else if(timeOfDay >= 20 && timeOfDay < 24){
+            greeting =  "Good Evening";
+            outsideView.setBackgroundColor(Color.rgb(188, 184, 206));
+        }
+        greetingView.setText(greeting);
+
+        //Load Images in new Thread
+        new Thread(){
+            @Override
+            public void run() {
+                //getDrawable
+                bitmapDrawable = new BitmapDrawable( getResources(),decodeSampledBitmapFromResource(getResources(),Util.getRandomSharedResource(context),350,250));
+                bitmap = decodeSampledBitmapFromResource(getResources(),Util.getTodayImage(timeOfDay,context),150,220);
+                //Update UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bvi.setBackground(bitmapDrawable);
+                        imageView.setImageBitmap(bitmap);
+                    }
+                });
+            }
+
+        }.start();
+
+        //Run on Separate Thread
+        new Thread(){
+            @Override
+            public void run() {
+                // Get VOD
+                JSONObject jObject = null;
+                try {
+                    String jsonData = TheWordContentService.getDailyVerse(sharedPreferences, context);
+                    if(jsonData!=null && jsonData.trim().length()>0) {
+                        jObject = new JSONObject(jsonData);
+                        dir = jObject.getString("dir");
+                        dirH = dir;
+                        JSONObject o = (JSONObject) jObject.getJSONArray("passages").get(0);
+                        book = o.getString("name");
+                        textBook = o.getString("book");
+                        //get rest
+                        JSONObject p = (JSONObject)o.getJSONArray("content").get(0);
+                        textChapter = p.getString("chapter");
+                        book = book +" "+ p.getString("chapter");
+                        JSONArray textArray = (JSONArray) p.getJSONArray("verses");
+                        for(int i=0;i<textArray.length();i++){
+                            JSONObject ol = (JSONObject) textArray.get(i);
+                            text = text + ol.getString("verse") +".  " +ol.getString("text") + System.getProperty("line.separator");
+                        }
+                        textHeading = book;
+                        textString = text;
+                      }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+                //Update UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bn.setText(book);
+                        bn.setTextDirection(dir.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
+                        bv.setText(text);
+                        bv.setTextDirection(dir.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
 
-                TextView bn = (TextView)findViewById(R.id.vodtb);
-                bn.setText(book);
-                textHeading = book;
-                bn.setTextDirection(dir.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
-                TextView bv = (TextView)findViewById(R.id.vodt);
-                bv.setText(text);
-                textString = text;
-                bv.setTextDirection(dir.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
+                        //Read full chapter
+                        textRead.setOnClickListener(v -> {
+                            SharedPreferencesUtil.setBook(sharedPreferences,context, textBook);
+                            SharedPreferencesUtil.setChapter(sharedPreferences,context,textChapter);
+                            Intent i = new Intent(context,HomeActivity.class);
+                            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        });
+
+                        //Share content
+                        shareText.setOnClickListener(v -> {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/*");
+                            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "The Digital Word Verse");
+                            String message = "<h1><b><span dir ='"+ dirH +"' >"+ textHeading+"</span></b></h1>" +
+                                    "<p dir='"+ dirH+"'> " + textString +"</p><BR>" +
+                                    "<a href='https://thedigitalword.org'>https://thedigitalword.org</a>";
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
+                            startActivity(Intent.createChooser(shareIntent, "Share with:"));
+                        });
+                    }
+                });
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        }.start();
 
-        try {
-            JSONObject jObjecti = null;
-            String texti = "";
-            String booki = "";
-            String diri = "ltr";
-            String jsonData = TheWordContentService.getRandomDailyVerse(sharedPreferences, this.getApplicationContext());
-            if(jsonData!=null && jsonData.trim().length()>0) {
-                jObjecti = new JSONObject(jsonData);
-                diri = jObjecti.getString("dir");
-                JSONObject o = (JSONObject) jObjecti.getJSONArray("passages").get(0);
-                booki = o.getString("name");
-                imageBook = o.getString("book");
-                //get rest
-                JSONObject p = (JSONObject)o.getJSONArray("content").get(0);
-                imageChapter = p.getString("chapter");
-                booki = booki +" "+ p.getString("chapter");
-                JSONObject t = (JSONObject) p.getJSONArray("verses").get(0);
-                booki = booki+":"+t.getString("verse");
-                texti = t.getString("text")+ "\n";
+        //Run on a separate Thread
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    JSONObject jObjecti = null;
+                    String jsonData = TheWordContentService.getRandomDailyVerse(sharedPreferences, context);
+                    if(jsonData!=null && jsonData.trim().length()>0) {
+                        jObjecti = new JSONObject(jsonData);
+                        diri = jObjecti.getString("dir");
+                        JSONObject o = (JSONObject) jObjecti.getJSONArray("passages").get(0);
+                        booki = o.getString("name");
+                        imageBook = o.getString("book");
+                        //get rest
+                        JSONObject p = (JSONObject)o.getJSONArray("content").get(0);
+                        imageChapter = p.getString("chapter");
+                        booki = booki +" "+ p.getString("chapter");
+                        JSONObject t = (JSONObject) p.getJSONArray("verses").get(0);
+                        booki = booki+":"+t.getString("verse");
+                        texti = t.getString("text")+ "\n";
+                    }
+                    imageHeading = booki;
+                    imageString=texti;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                //Update UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bni.setText(booki);
+                        bni.setTextDirection(diri.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
+                        bvi.setText(texti);
+                        bvi.setTextDirection(diri.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
+
+                        //Read full Chapter
+                        imageRead.setOnClickListener(v -> {
+                            SharedPreferencesUtil.setBook(sharedPreferences,context, imageBook);
+                            SharedPreferencesUtil.setChapter(sharedPreferences,context,imageChapter);
+                            Intent i = new Intent(context,HomeActivity.class);
+                            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        });
+                        //Share Content
+                        imageText.setOnClickListener(v -> {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/*");
+                            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "The Digital Word Verse");
+                            String message = "<h1><b><span dir ='"+ dirH +"' >"+ imageHeading+"</span></b></h1>" +
+                                    "<p dir='"+ dirH+"'> " + imageString +"</p><BR>" +
+                                    "<a href='https://thedigitalword.org'>https://thedigitalword.org</a>";
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
+                            startActivity(Intent.createChooser(shareIntent, "Share with:"));
+                        });
+                    }
+                });
             }
-            TextView bni = (TextView)findViewById(R.id.vodtbi);
-            bni.setText(booki);
-            imageHeading = booki;
-            bni.setTextDirection(diri.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
-            TextView bvi = (TextView)findViewById(R.id.vodti);
-            bvi.setBackground(new BitmapDrawable( getResources(),decodeSampledBitmapFromResource(getResources(),Util.getRandomSharedResource(this.getApplicationContext()),350,250)));
-            bvi.setText(texti);
-            imageString=texti;
-            bvi.setTextDirection(diri.equalsIgnoreCase("LTR")?TextView.TEXT_DIRECTION_LTR:TextView.TEXT_DIRECTION_RTL);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        //Read full chapter
-        TextView textRead = (TextView) findViewById(R.id.vodtc);
-        textRead.setOnClickListener(v -> {
-            SharedPreferencesUtil.setBook(sharedPreferences,this, textBook);
-            SharedPreferencesUtil.setChapter(sharedPreferences,this,textChapter);
-            Intent i = new Intent(this,HomeActivity.class);
-            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        });
-
-        TextView imageRead = (TextView) findViewById(R.id.vodtci);
-        imageRead.setOnClickListener(v -> {
-            SharedPreferencesUtil.setBook(sharedPreferences,this, imageBook);
-            SharedPreferencesUtil.setChapter(sharedPreferences,this,imageChapter);
-            Intent i = new Intent(this,HomeActivity.class);
-            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        });
-
-        //Share content
-        ImageView shareText = (ImageView)findViewById(R.id.vodshare);
-        shareText.setOnClickListener(v -> {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/*");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "The Digital Word Verse");
-            String message = "<h1><b><span dir ='"+ dirH +"' >"+ textHeading+"</span></b></h1>" +
-                                "<p dir='"+ dirH+"'> " + textString +"</p><BR>" +
-                                "<a href='https://thedigitalword.org'>https://thedigitalword.org</a>";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
-            startActivity(Intent.createChooser(shareIntent, "Share with:"));
-        });
-
-        ImageView imageText = (ImageView)findViewById(R.id.vodsharei);
-        imageText.setOnClickListener(v -> {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/*");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "The Digital Word Verse");
-            String message = "<h1><b><span dir ='"+ dirH +"' >"+ imageHeading+"</span></b></h1>" +
-                    "<p dir='"+ dirH+"'> " + imageString +"</p><BR>" +
-                    "<a href='https://thedigitalword.org'>https://thedigitalword.org</a>";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
-            startActivity(Intent.createChooser(shareIntent, "Share with:"));
-        });
+        }.start();
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -215,29 +296,6 @@ public class TodayActivity extends AppCompatActivity {
             }
         });
         navigationView.setSelectedItemId(R.id.action_today);
-        //Set the Date Greeting and Image
-        Formatter fmt = new Formatter();
-        Calendar cal = Calendar.getInstance();
-        fmt.format("%tA, %tB %td", cal, cal, cal);
-        dateView.setText(fmt.toString());
-        int timeOfDay = cal.get(Calendar.HOUR_OF_DAY);
-        String greeting = "";
-
-        if(timeOfDay >= 0 && timeOfDay < 12){
-            greeting =  "Good Morning";
-            outsideView.setBackgroundColor(Color.rgb(229, 220, 210));
-        }else if(timeOfDay >= 12 && timeOfDay < 17){
-            greeting = "Good Afternoon";
-            outsideView.setBackgroundColor(Color.rgb(255, 240, 189));
-        }else if(timeOfDay >= 17 && timeOfDay < 20){
-            greeting = "Good Evening";
-            outsideView.setBackgroundColor(Color.rgb(229, 164, 198));
-        }else if(timeOfDay >= 20 && timeOfDay < 24){
-            greeting =  "Good Evening";
-            outsideView.setBackgroundColor(Color.rgb(188, 184, 206));
-        }
-        greetingView.setText(greeting);
-        imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),Util.getTodayImage(timeOfDay,this),150,220));
 
         //Set TABS
         tabLayout = (TabLayout) findViewById(R.id.tabsocial);

@@ -20,13 +20,14 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fafafa"
+        android:background="?attr/actionBarStyle"
         app:layout_anchor="@+id/appBarLayoutT"
         app:layout_anchorGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:titleTextColor="?attr/titleTextColor"
         app:title="The Digital Word"
         />
 </com.google.android.material.appbar.AppBarLayout>
@@ -34,7 +35,7 @@
         android:id="@+id/scrollViewToday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/colorOnPrimary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="@+id/appBarLayoutT"
         app:layout_constraintStart_toStartOf="@+id/appBarLayoutT"
@@ -50,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
         app:cardPreventCornerOverlap="false"
         app:cardElevation="0dp"
         app:cardCornerRadius="0dp">
@@ -98,7 +99,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:src="@drawable/a1"
                 android:scaleType="fitXY"/>
 
             <!--Text View to display Course Name-->
@@ -109,8 +109,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 android:layout_toEndOf="@id/todayimage"
-                android:textColor="#626262"
-                android:textSize="15sp"
+                android:textColor="?attr/textAppearanceBody1"
+                android:textSize="17sp"
                  />
 
             <!--Text VIew to display COurse Rating-->
@@ -125,7 +125,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/todayimage"
                 android:drawablePadding="2dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/titleTextColor"
                 android:textSize="23sp"
                 android:textStyle="bold"
                 />
@@ -140,7 +140,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardElevation="5dp"
             app:cardCornerRadius="5dp">
             <RelativeLayout
@@ -154,8 +154,9 @@
                     android:layout_marginTop="5dp"
                     android:text="Verse of the Day"
                     android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
                     android:drawableStart="@drawable/ic_baseline_wb_sunny_24"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/titleTextColor"
                     android:textSize="15sp"
                     />
                 <TextView
@@ -166,7 +167,7 @@
                     android:layout_below="@id/vodtl"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="1dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -179,7 +180,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/titleTextColor"
                     android:textSize="16sp"
 
                     />
@@ -191,7 +192,7 @@
                     android:layout_below="@id/vodt"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="20dp"
-                    android:textColor="#751a13"
+                    android:textColor="?attr/actionMenuTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -201,6 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/vodtc"
+                    android:tint="?attr/textAppearanceBody2"
                     android:src="@drawable/ic_baseline_share_24"
                     android:layout_marginStart="70dp"
                     />
@@ -215,7 +217,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardElevation="5dp"
             app:cardCornerRadius="5dp">
             <RelativeLayout
@@ -229,8 +231,9 @@
                     android:layout_marginTop="5dp"
                     android:text="Splash Screen Verse"
                     android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
                     android:drawableStart="@drawable/ic_baseline_image_24"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/titleTextColor"
                     android:textSize="15sp"
                     />
                 <TextView
@@ -241,7 +244,7 @@
                     android:layout_below="@id/vodtli"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="1dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -276,7 +279,7 @@
                     android:layout_below="@id/vodti"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="20dp"
-                    android:textColor="#751a13"
+                    android:textColor="?attr/actionMenuTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -287,19 +290,57 @@
                     android:layout_marginTop="10dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/vodtci"
+                    android:tint="?attr/textAppearanceBody2"
                     android:src="@drawable/ic_baseline_share_24"
                     android:layout_marginStart="70dp"
                     />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:id="@+id/covi"
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/coverpage" />
+            app:cardBackgroundColor="?attr/backgroundColor"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vodtlii"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Hebrews 4:12"
+                    android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
+                    android:drawableStart="@drawable/ic_baseline_book_24"
+                    android:textColor="?attr/titleTextColor"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/vodtii"
+                    android:text="For the word of God is quick, and powerful, and sharper than any twoedged sword.."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodtlii"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="16sp"
+                    android:paddingBottom="10dp"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
         <RelativeLayout
             android:layout_height="1400dp"
             android:layout_width="match_parent"
@@ -329,6 +370,10 @@
             </LinearLayout>
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabsocial"
+                app:tabIndicatorColor="?attr/tabIndicatorColor"
+                app:tabTextColor="?attr/tabTextColor"
+                app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+                app:tabIconTint="?attr/tabIconTint"
                 android:layout_below="@id/sf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

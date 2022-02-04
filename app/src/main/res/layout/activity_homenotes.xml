@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeNotesActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/htoolbarNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarStyle" >
+            <TextView
+                android:id="@+id/hbnoteBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTint="?attr/titleTextColor"
+                android:drawableStart="@drawable/ic_baseline_keyboard_backspace_24"
+                android:textStyle="bold"
+                android:text="  Back"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="@+id/appBarLayoutS"
+        app:layout_constraintStart_toStartOf="@+id/appBarLayoutS"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutS">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="My Bible Notes"
+                android:id="@+id/hnotestitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textColor="?attr/textAppearanceHeadline4"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:id="@+id/hbnotes"
+                android:text="No notes found.."
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="16sp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hidbnotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

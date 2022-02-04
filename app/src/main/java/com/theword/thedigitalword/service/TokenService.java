@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.theword.thedigitalword.R;
 import com.theword.thedigitalword.util.SharedPreferencesUtil;
+import com.theword.thedigitalword.util.Util;
 
 import org.json.JSONObject;
 

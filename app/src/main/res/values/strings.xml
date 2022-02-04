@@ -7,7 +7,24 @@
     <string name="chapter">TDW_CHAPTER</string>
     <string name="token">TDW_TOKEN</string>
     <string name="refresh_token">TDW_REFRESH_TOKEN</string>
+    <string name="intro_seen">TDW_INTRO_SEEN</string>
+    <string name="theme">TDW_THEME</string>
+    <string name="font_size">TDW_FONT_SIZE</string>
+    <string name="push_notification">TDW_PUSH_NOTIFICATION</string>
+    <string name="rem_notification">TDW_REM_NOTIFICATION</string>
+    <string name="rem_hour">TDW_REM_HOUR</string>
+    <string name="rem_min">TDW_REM_MIN</string>
+    <string name="widget_service">TDW_WIDGET_SERVICE</string>
+    <string name="widget_small_service">TDW_WIDGET_SMALL_SERVICE</string>
+    <string name="push_hour">9</string>
+    <string name="push_min">0</string>
+    <string name="push_channel_ID">TDW_PUSH_CHANNEL_VOD_0001</string>
+    <string name="push_channel_name">TDW_PUSH_CHANNEL_VOD</string>
+    <string name="reminder_channel_ID">TDW_PUSH_CHANNEL_REM_0001</string>
+    <string name="reminder_channel_name">TDW_PUSH_CHANNEL_REM</string>
+
     <string name="action_settings">Settings</string>
+    <string name="section_format">Page %1$d</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">One Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -33,4 +50,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="dsa_sample_article">Android Sample Article</string>
     <string name="read">Read</string>
+    <string name="title_activity_onboard">OnboardActivity</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="dark">DARK</string>
+    <string name="title_activity_personal_note">PersonalNoteActivity</string>
 </resources>

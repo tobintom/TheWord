@@ -32,6 +32,7 @@ public class First2Fragment extends Fragment {
 
 
     SharedPreferences sharedPreferences = null;
+    String bname = null;
 
     public First2Fragment(){
 
@@ -47,32 +48,48 @@ public class First2Fragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.app_id), Context.MODE_PRIVATE);
+        Util.onActivityCreateSetTheme(this.getActivity(),SharedPreferencesUtil.getTheme(sharedPreferences,this.getContext()));
         super.onViewCreated(view, savedInstanceState);
         GridView gridView = (GridView)this.getActivity().findViewById(R.id.chaptergrid);
         TextView text = (TextView)this.getActivity().findViewById(R.id.chapterbook);
         ChapterAdapter chapterAdapter = new ChapterAdapter(this.getContext(), new ArrayList());
 
         //this.getActivity().setContentView(R.layout.fragment_first2);
-        sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.app_id), Context.MODE_PRIVATE);
-        try {
-            String jsonData = TheWordMetaService.getChapters(this.getActivity().getSharedPreferences(getString(R.string.app_id), Context.MODE_PRIVATE),
-                    this.getContext(),Util.getSelectedBook());
-            if(jsonData!=null && jsonData.trim().length()>0) {
-                JSONObject obj = new JSONObject(jsonData);
-                String lang = obj.getString("id");
-                String bname= obj.getString("name");
-                text.setText(bname);
-                text.setTypeface(null,Typeface.BOLD);
-                JSONArray arr = obj.getJSONArray("chapters");
-                for(int i=0;i<arr.length();i++){
-                    String chapter =   arr.getString(i);
-                    chapterAdapter.addChapter(chapter);
-                }
-            }
-        }catch (Exception e){
 
-        }
-        gridView.setAdapter(chapterAdapter);
+        Context context = this.getContext();
+        //Process on a separate thread
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    String jsonData = TheWordMetaService.getChapters(sharedPreferences,
+                            context,Util.getSelectedBook());
+                    if(jsonData!=null && jsonData.trim().length()>0) {
+                        JSONObject obj = new JSONObject(jsonData);
+                        String lang = obj.getString("id");
+                        bname= obj.getString("name");
+                        JSONArray arr = obj.getJSONArray("chapters");
+                        for(int i=0;i<arr.length();i++){
+                            String chapter =   arr.getString(i);
+                            chapterAdapter.addChapter(chapter);
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                //Update UI
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        text.setText(bname);
+                        text.setTypeface(null,Typeface.BOLD);
+                        gridView.setAdapter(chapterAdapter);
+                    }
+                });
+            }
+        }.start();
+
         gridView.setOnItemClickListener((parent, view1, position, id) ->
         {
             String selectedChapter = chapterAdapter.getItem(position);
