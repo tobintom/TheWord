@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">The Digital Word</string>
+    <string name="app_id">TDW_ID</string>
+    <string name="language">TDW_LANG</string>
+    <string name="direction">TDW_DIRECTION</string>
+    <string name="book">TDW_BOOK</string>
+    <string name="chapter">TDW_CHAPTER</string>
+    <string name="token">TDW_TOKEN</string>
+    <string name="refresh_token">TDW_REFRESH_TOKEN</string>
+    <string name="intro_seen">TDW_INTRO_SEEN</string>
+    <string name="theme">TDW_THEME</string>
+    <string name="font_size">TDW_FONT_SIZE</string>
+    <string name="push_notification">TDW_PUSH_NOTIFICATION</string>
+    <string name="rem_notification">TDW_REM_NOTIFICATION</string>
+    <string name="rem_hour">TDW_REM_HOUR</string>
+    <string name="rem_min">TDW_REM_MIN</string>
+    <string name="widget_service">TDW_WIDGET_SERVICE</string>
+    <string name="widget_small_service">TDW_WIDGET_SMALL_SERVICE</string>
+    <string name="push_hour">9</string>
+    <string name="push_min">0</string>
+    <string name="push_channel_ID">TDW_PUSH_CHANNEL_VOD_0001</string>
+    <string name="push_channel_name">TDW_PUSH_CHANNEL_VOD</string>
+    <string name="reminder_channel_ID">TDW_PUSH_CHANNEL_REM_0001</string>
+    <string name="reminder_channel_name">TDW_PUSH_CHANNEL_REM</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Page %1$d</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">One Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello one fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="token_auth_url">https://thedigitalword.org:5000/theword/oauth/token</string>
+    <string name="oauth_client">theWord-client</string>
+    <string name="oauth_secret">secret</string>
+    <string name="oauth_id">56ae9949-fd44-4b8f-a92e-d70301063902</string>
+    <string name="oauth_password">dRx2FZEEPWQ3JWvJceJf8Bvm9vWqxXhA</string>
+    <string name="word_api">https://thedigitalword.org:5000/theword/v1/bible</string>
+    <string name="meta_api">https://thedigitalword.org:5000/theword/v1/bibles</string>
+    <string name="title_activity_language_selector">LanguageSelectorActivity</string>
+    <string name="title_activity_book_selector">BookSelector</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="dsa_sample_article">Android Sample Article</string>
+    <string name="read">Read</string>
+    <string name="title_activity_onboard">OnboardActivity</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="dark">DARK</string>
+    <string name="title_activity_personal_note">PersonalNoteActivity</string>
+</resources>

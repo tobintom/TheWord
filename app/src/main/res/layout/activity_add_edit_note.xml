@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/backgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEditNote">
+    <TextView
+        android:id="@+id/t"
+        android:text="My Personal Note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="?attr/textAppearanceHeadline4"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <EditText
+        android:id="@+id/editTitle_E"
+        android:layout_width="0dp"
+        android:hint="Add Title.."
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top|left"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:inputType="textCapSentences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t"
+        app:layout_constraintBottom_toTopOf="@id/editText_E"/>
+
+    <EditText
+        android:id="@+id/editText_E"
+        android:layout_width="0dp"
+        android:hint="Add Content.."
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:inputType="textCapSentences|textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTitle_E" />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/viewTitle_V"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t"
+        app:layout_constraintBottom_toTopOf="@id/editText_E"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/viewText_V"
+        android:textSize="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTitle_E" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_save"
+            android:backgroundTint="?attr/actionBarStyle"
+            android:textColor="?attr/titleTextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:textColor="?attr/titleTextColor"
+            android:layout_margin="5dp"
+            android:backgroundTint="?attr/actionBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayoutV"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_editV"
+            android:layout_margin="5dp"
+            android:backgroundTint="?attr/actionBarStyle"
+            android:textColor="?attr/titleTextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit" />
+        <Button
+            android:id="@+id/button_deleteV"
+            android:layout_margin="5dp"
+            android:backgroundTint="?attr/actionBarStyle"
+            android:textColor="?attr/titleTextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/button_cancelV"
+            android:layout_margin="5dp"
+            android:textColor="?attr/titleTextColor"
+            android:backgroundTint="?attr/actionBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

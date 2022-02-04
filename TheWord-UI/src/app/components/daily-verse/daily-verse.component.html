@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div [ngStyle]="{          
+    background: 'url(' + bgurl + ') no-repeat center center fixed',
+    'background-size': 'cover'
+}">
+    
+<!-- Header -->
+<header id="header">
+    <div class="logo"><span>Verse Of The Day</span></div>
+</header>
+
+<!-- Main -->
+<section id="main">
+    <div class="vodinner">
+
+    <!-- One -->
+        <section id="one" class="wrap style1">          
+            <header class="special">
+                <a (click)="chapterClick();" role="button" title="Click to read full chapter" style="text-decoration: none;" >
+                    <h2 [dir]=dir>{{book}} {{chapter}} <i class="fa fa-list"></i></h2></a>
+                <p *ngIf="!isEng()" dir="ltr">{{englishName}} {{chapter}}</p>
+            </header>
+            <div class="content">
+             
+                    <p [dir]=dir [align] = align>
+                        <label *ngFor="let verse of verses" >
+                           <strong style="font-weight: bold;">{{verse.verse}}.</strong> {{verse.text}}
+                        </label>
+                    </p>
+            </div>            
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="https://twitter.com/digitalTheWord" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="https://www.facebook.com/theworddigital" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>            
+            <li><a role="button" placement="top" ngbPopover="Email us at thewordhelp@gmail.com" popoverTitle="Contact Us" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+            <li><a href='https://play.google.com/store/apps/details?id=com.theword.thedigitalword&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="70"/></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        Copyleft <span class="copy-left">&copy;</span> {{anio}} The Word
+        <BR>Freely Received, Freely Given.
+    </div>
+</footer>
+</div>
+
+
+ 

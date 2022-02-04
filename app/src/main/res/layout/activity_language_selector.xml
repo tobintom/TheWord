@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LanguageSelectorActivity">
+
+   <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/langappBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/lang_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/actionBarStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="" />
+
+            <TextView
+                android:id="@+id/toollangname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_keyboard_backspace_24"
+                android:textStyle="bold"
+                android:text="  Back"
+                android:drawableTint="?attr/titleTextColor"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/lang_toolbar"
+                app:layout_constraintStart_toStartOf="@+id/lang_toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                  />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/langTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_translate_24"
+        android:drawableTint="#5d4037"
+        android:background="@drawable/rectangle"
+        android:text="  Select Language"
+        android:textColor="#5d4037"
+        android:textSize="18sp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/langappBarLayout"
+        app:layout_constraintStart_toStartOf="@+id/langappBarLayout"
+        app:layout_constraintTop_toBottomOf="@+id/langappBarLayout" />
+
+    <ListView
+        android:id="@+id/card_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:listSelector="@drawable/card_background_selector"
+        app:layout_constraintEnd_toEndOf="@+id/langTitle"
+        app:layout_constraintStart_toStartOf="@+id/langTitle"
+        app:layout_constraintTop_toBottomOf="@+id/langTitle"
+        android:paddingBottom="150dp">
+
+    </ListView>
+</androidx.constraintlayout.widget.ConstraintLayout>

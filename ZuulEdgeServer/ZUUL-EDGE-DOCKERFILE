@@ -1,0 +1,6 @@
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+MAINTAINER TOBIN_TOM
+COPY ./target/ZuulEdgeServer-1.0.jar /opt/lib/
+COPY Zuulstartup.sh /opt/lib/Zuulstartup.sh
+RUN chmod 755 /opt/lib/Zuulstartup.sh
+EXPOSE 5000

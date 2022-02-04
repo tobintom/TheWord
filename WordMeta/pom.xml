@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.theword</groupId>
   <artifactId>WordMeta-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>WordMeta</name>
   <packaging>jar</packaging>
   
@@ -35,6 +35,16 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>			
 		</dependency>		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
   </dependencies>
   <dependencyManagement>
 		<dependencies>

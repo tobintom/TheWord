@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/todaylayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TodayActivity">
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayoutT"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:liftOnScroll="true"
+    >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/actionBarStyle"
+        app:layout_anchor="@+id/appBarLayoutT"
+        app:layout_anchorGravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:titleTextColor="?attr/titleTextColor"
+        app:title="The Digital Word"
+        />
+</com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorOnPrimary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="@+id/appBarLayoutT"
+        app:layout_constraintStart_toStartOf="@+id/appBarLayoutT"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutT">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="0dp">
+       <!-- app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:cardMaxElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        -->
+
+
+        <!--
+            In the above cardview widget
+            cardelevation property will give elevation to your card view
+            card corner radius will provide radius to your card view
+            card background color will give background color to your card view
+            card max elevation will give the cardview maximum elevation
+            card prevent corner overlap will add padding to CardView on v20 and
+            before to prevent intersections between the Card content and rounded corners.
+            card use compact padding will add padding in API v21+ as well to have the same
+            measurements with previous versions.
+        -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--ImageVIew to display our Course Image-->
+
+            <ImageView
+                android:id="@+id/outside_image"
+                android:layout_width="150dp"
+                android:layout_height="220dp"
+                android:rotation="8"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#e7b6d0"
+                 />
+            <ImageView
+                android:id="@+id/todayimage"
+                android:layout_width="150dp"
+                android:layout_height="220dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="5dp"
+                android:scaleType="fitXY"/>
+
+            <!--Text View to display Course Name-->
+            <TextView
+                android:id="@+id/todaydate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/todayimage"
+                android:textColor="?attr/textAppearanceBody1"
+                android:textSize="17sp"
+                 />
+
+            <!--Text VIew to display COurse Rating-->
+            <!--Image used in present in drawable folder-->
+            <TextView
+                android:id="@+id/todayGreeting"
+                android:text="Good Morning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/todaydate"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/todayimage"
+                android:drawablePadding="2dp"
+                android:textColor="?attr/titleTextColor"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vodtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Verse of the Day"
+                    android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
+                    android:drawableStart="@drawable/ic_baseline_wb_sunny_24"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:id="@+id/vodtb"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodtl"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="1dp"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/vodt"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodtb"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="16sp"
+
+                    />
+                <TextView
+                    android:id="@+id/vodtc"
+                    android:text="Read Full Chapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodt"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="20dp"
+                    android:textColor="?attr/actionMenuTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:id="@+id/vodshare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/vodtc"
+                    android:tint="?attr/textAppearanceBody2"
+                    android:src="@drawable/ic_baseline_share_24"
+                    android:layout_marginStart="70dp"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vodtli"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Splash Screen Verse"
+                    android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
+                    android:drawableStart="@drawable/ic_baseline_image_24"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:id="@+id/vodtbi"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodtli"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="1dp"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/vodti"
+                    android:text=""
+                    android:scaleType="centerCrop"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="350dp"
+                    android:layout_height="300dp"
+                    android:layout_below="@id/vodtbi"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:shadowColor="#000"
+                    android:shadowDx="15"
+                    android:shadowDy="15"
+                    android:padding="20dp"
+                    android:shadowRadius="25"
+                    />
+                <TextView
+                    android:id="@+id/vodtci"
+                    android:text="Read Full Chapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/vodti"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="20dp"
+                    android:textColor="?attr/actionMenuTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:id="@+id/vodsharei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/vodtci"
+                    android:tint="?attr/textAppearanceBody2"
+                    android:src="@drawable/ic_baseline_share_24"
+                    android:layout_marginStart="70dp"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="?attr/backgroundColor"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vodtlii"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Hebrews 4:12"
+                    android:drawablePadding="15dp"
+                    android:drawableTint="?attr/textAppearanceBody2"
+                    android:drawableStart="@drawable/ic_baseline_book_24"
+                    android:textColor="?attr/titleTextColor"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/vodtii"
+                    android:text="For the word of God is quick, and powerful, and sharper than any twoedged sword.."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vodtlii"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/titleTextColor"
+                    android:textSize="16sp"
+                    android:paddingBottom="10dp"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_height="1400dp"
+            android:layout_width="match_parent"
+            >
+            <LinearLayout
+                android:id="@+id/sf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fee5c5">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fee5c5"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="90dp"
+                android:layout_marginRight="90dp"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/sm1"
+                android:drawableRight="@drawable/sm1"
+                android:text="Social Medial Feeds"
+                android:textColor="@color/black"
+                />
+            </LinearLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabsocial"
+                app:tabIndicatorColor="?attr/tabIndicatorColor"
+                app:tabTextColor="?attr/tabTextColor"
+                app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+                app:tabIconTint="?attr/tabIconTint"
+                android:layout_below="@id/sf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/socialview_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tabsocial" />
+        </RelativeLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        layout="@layout/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

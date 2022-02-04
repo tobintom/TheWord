@@ -1,0 +1,115 @@
+
+element.style {
+  will-change: opacity, transform;
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+.side-image.shadow.rounded.center-element.up.gray {
+  background-color: #f6f6f600;
+}
+
+.side-image.shadow.rounded.center-element.up {
+  margin-top: -148px;
+}
+
+.side-image.shadow.rounded.center-element {
+  position: relative;
+  z-index: 1;
+  margin-top: 0px;
+  padding: 47px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.gray {
+ 
+  padding: 101px 22px 100px;
+  border-radius: 1rem;
+  background-color:#00000042;
+}
+
+.center-element {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.roundedl {
+  position: relative;
+  z-index: 0;
+  margin-bottom: 5%;
+  border-radius: 1rem;
+}
+
+.shadowl {
+  box-shadow: 0 0 13px 7px #ffffff45;
+}
+ 
+.less-red {
+  padding: 101px 22px 136px;
+  border-radius: 20px;
+  background-color: #ffefee;
+  background-image: url(https://assets.website-files.com/5f15be7…/5f1da1a…_G5.svg);
+  background-position: 50% 105%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ss {
+  top: -8px;
+  height: 78px;
+  box-shadow: 0 0 80px 0 rgba(245, 101, 102, 0.33);
+}
+.full-bg {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 2;
+  background-color: #fff1f0;
+  -webkit-transform: translate(0px, 100%);
+  -ms-transform: translate(0px, 100%);
+  transform: translate(0px, 100%);
+}
+
+.modal {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 5px;
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.5;
+  max-width: 50%;
+  padding: 1rem 2rem;
+  a {
+    color: #bf0222;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .modal {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);  
+  }
+  .warning {
+    display: none;
+  }
+}
+
+ 
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}

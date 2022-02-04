@@ -1,0 +1,6 @@
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+MAINTAINER TOBIN_TOM
+COPY ./target/AuthorizationServer-service-1.0.jar /opt/lib/
+COPY AuthorizationStartup.sh /opt/lib/AuthorizationStartup.sh
+RUN chmod 755 /opt/lib/AuthorizationStartup.sh
+EXPOSE 4000

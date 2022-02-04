@@ -1,0 +1,1 @@
+25 4 * * * java -jar /TheWordBatch-1.0.jar

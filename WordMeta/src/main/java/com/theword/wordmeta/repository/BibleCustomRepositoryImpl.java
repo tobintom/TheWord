@@ -1,6 +1,7 @@
 package com.theword.wordmeta.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
@@ -25,8 +26,8 @@ public class BibleCustomRepositoryImpl  implements BibleCustomRepository{
 	}
 	
 	@Override
+	@Cacheable("Bibles")
 	public Bible getBibleBooks(String id) {
-		
 		return mongoTemplate.aggregate(Aggregation.newAggregation(
 		        match(Criteria.where("code").is(id)),
 		        LookupOperation.newLookup()

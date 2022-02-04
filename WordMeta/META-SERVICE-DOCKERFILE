@@ -1,0 +1,6 @@
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+MAINTAINER TOBIN_TOM
+COPY ./target/WordMeta-service-1.0.jar /opt/lib/
+COPY Metastartup.sh /opt/lib/Metastartup.sh
+RUN chmod 755 /opt/lib/Metastartup.sh
+EXPOSE 3001-3005

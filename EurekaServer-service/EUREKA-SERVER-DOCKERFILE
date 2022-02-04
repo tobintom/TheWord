@@ -1,0 +1,5 @@
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+MAINTAINER TOBIN_TOM
+COPY ./target/EurekaServer-service-1.0.jar /opt/lib/
+ENTRYPOINT ["java","-Xshareclasses","-Xss512k","-XX:MaxRAM=200m","-jar","/opt/lib/EurekaServer-service-1.0.jar" ]
+EXPOSE 3000

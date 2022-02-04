@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_height="match_parent"
+        android:id="@+id/splash_image"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+   />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/splash_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:shadowColor="#000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:padding="20dp"
+        android:shadowRadius="25"
+        />
+    <com.google.android.material.textview.MaterialTextView
+    android:id="@+id/splash_book"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_below="@id/splash_text"
+    android:autoSizeTextType="uniform"
+    android:layout_centerInParent="true"
+    android:textStyle="bold|italic"
+    android:textFontWeight="500"
+    android:textColor="@color/white"
+    android:shadowColor="#000"
+    android:shadowDx="10"
+    android:shadowDy="10"
+    android:shadowRadius="25"
+    android:textSize="20sp"
+    />
+
+
+</RelativeLayout>
